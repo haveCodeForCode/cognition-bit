@@ -87,9 +87,9 @@ public class SmsController {
         String moudle = Constant.FREE_SMS;
         int times=smsLogService.snedSmsMessage(moudle,mobile,signName,templateCode,keyword,outId);
         if (times>0) {
-            return ResultData.success();
+            return ResultData.result(true);
         }
-        return ResultData.error("系统错误");
+        return ResultData.result(false, "系统错误");
     }
 
 /**************************************************************************/
@@ -151,9 +151,9 @@ public class SmsController {
     @RequiresPermissions("modules:sms:add")
     public ResultData save(SmsLog smsLog){
         if(smsLogService.save(smsLog)>0){
-            return ResultData.success();
+            return ResultData.result(true);
         }
-        return ResultData.error();
+        return ResultData.result(false);
     }
     /**
      * 修改
@@ -163,7 +163,7 @@ public class SmsController {
     @RequiresPermissions("modules:sms:edit")
     public ResultData update(SmsLog smsLog){
         smsLogService.update(smsLog);
-        return ResultData.success();
+        return ResultData.result(true);
     }
 
     /**
@@ -174,9 +174,9 @@ public class SmsController {
     @RequiresPermissions("modules:sms:remove")
     public ResultData remove(Long id){
         if(smsLogService.remove(id)>0){
-            return ResultData.success();
+            return ResultData.result(true);
         }
-        return ResultData.error();
+        return ResultData.result(false);
     }
 
     /**
@@ -187,7 +187,7 @@ public class SmsController {
     @RequiresPermissions("modules:sms:batchRemove")
     public ResultData remove(@RequestParam("ids[]") Long[] ids){
         smsLogService.batchRemove(ids);
-        return ResultData.success();
+        return ResultData.result(true);
     }
 
 }

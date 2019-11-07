@@ -1,12 +1,12 @@
 package com.root.cognition.system.controller;
 
 import com.root.cognition.common.config.Constant;
-import com.root.cognition.common.until.ResultData;
-import com.root.cognition.system.persistence.BaseController;
-import com.root.cognition.system.persistence.Tree;
 import com.root.cognition.common.until.Query;
+import com.root.cognition.common.until.ResultData;
 import com.root.cognition.common.until.StringUtils;
 import com.root.cognition.system.entity.Menu;
+import com.root.cognition.system.persistence.BaseController;
+import com.root.cognition.system.persistence.Tree;
 import com.root.cognition.system.service.MenuService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,9 +95,9 @@ public class MenuController extends BaseController {
 		//根据权限存入创建者
 		menu.setCreateBy(getUserId());
 		if (menuService.save(menu) > 0) {
-			return ResultData.success();
+			return ResultData.result(true);
 		} else {
-			return ResultData.customMap(1, "保存失败", null);
+			return ResultData.result(false, "保存失败");
 		}
 	}
 
@@ -107,9 +107,9 @@ public class MenuController extends BaseController {
 	@ResponseBody
     ResultData update(Menu menu) {
 		if (menuService.update(menu) > 0) {
-			return ResultData.success();
+			return ResultData.result(true);
 		} else {
-			return ResultData.customMap(1, "更新失败", null);
+			return ResultData.result(false, "更新失败");
 		}
 	}
 
@@ -119,9 +119,9 @@ public class MenuController extends BaseController {
 	@ResponseBody
     ResultData remove(Long id) {
 		if (menuService.delete(id) > 0) {
-			return ResultData.success();
+			return ResultData.result(true);
 		} else {
-			return ResultData.customMap(1, "删除失败", null);
+			return ResultData.result(false, "删除失败");
 		}
 	}
 

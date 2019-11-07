@@ -1,13 +1,13 @@
 package com.root.cognition.modules.controller;
 
 import com.root.cognition.common.config.Constant;
-import com.root.cognition.common.until.ResultData;
-import com.root.cognition.system.persistence.BaseController;
 import com.root.cognition.common.until.PageUtils;
 import com.root.cognition.common.until.Query;
+import com.root.cognition.common.until.ResultData;
 import com.root.cognition.common.until.StringUtils;
 import com.root.cognition.modules.entity.Dict;
 import com.root.cognition.modules.service.DictService;
+import com.root.cognition.system.persistence.BaseController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -92,9 +92,9 @@ public class DictController extends BaseController {
         //补充实体内信息
         dict.setCreateBy(getUserId());
         if (dictService.save(dict) > 0) {
-            return ResultData.success();
+            return ResultData.result(true);
         }
-        return ResultData.error();
+        return ResultData.result(false);
     }
 
     /**
@@ -107,7 +107,7 @@ public class DictController extends BaseController {
         dict.setUpdateBy(getUserId());
         dict.setUpdateTime(new Date());
         dictService.update(dict);
-        return ResultData.success();
+        return ResultData.result(true);
     }
 
     /**
@@ -118,9 +118,9 @@ public class DictController extends BaseController {
     @RequiresPermissions("modules:dict:remove")
     public ResultData remove(Long id) {
         if (dictService.remove(id) > 0) {
-            return ResultData.success();
+            return ResultData.result(true);
         }
-        return ResultData.error();
+        return ResultData.result(false);
     }
 
     /**
@@ -131,7 +131,7 @@ public class DictController extends BaseController {
     @RequiresPermissions("modules:dict:batchRemove")
     public ResultData remove(@RequestParam("ids[]") Long[] ids) {
         dictService.batchRemove(ids);
-        return ResultData.success();
+        return ResultData.result(true);
     }
 
     @GetMapping("/type")

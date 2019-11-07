@@ -1,15 +1,15 @@
 package com.root.cognition.system.controller;
 
 
-import com.root.cognition.common.until.ResultData;
-import com.root.cognition.system.persistence.BaseController;
-import com.root.cognition.system.persistence.Tree;
 import com.root.cognition.common.until.PageUtils;
 import com.root.cognition.common.until.Query;
+import com.root.cognition.common.until.ResultData;
 import com.root.cognition.modules.service.DictService;
 import com.root.cognition.system.entity.Dept;
 import com.root.cognition.system.entity.Role;
 import com.root.cognition.system.entity.User;
+import com.root.cognition.system.persistence.BaseController;
+import com.root.cognition.system.persistence.Tree;
 import com.root.cognition.system.service.RoleService;
 import com.root.cognition.system.service.UserService;
 import org.apache.ibatis.annotations.Param;
@@ -32,7 +32,9 @@ public class UserController extends BaseController {
 
 
 	private UserService userService;
+
 	private RoleService roleService;
+
 	private DictService dictService;
 
 	@Autowired
@@ -90,9 +92,9 @@ public class UserController extends BaseController {
     ResultData save(User user) {
 //		user.setUserPassword(Md5Utils.encrypt(user.getUsername(), user.getPassword()));
 		if (userService.save(user) > 0) {
-			return ResultData.success();
+			return ResultData.result(true);
 		}
-		return ResultData.error();
+		return ResultData.result(false);
 	}
 
 	@RequiresPermissions("sys:user:edit")
@@ -101,9 +103,9 @@ public class UserController extends BaseController {
 	@ResponseBody
     ResultData update(User user) {
 		if (userService.update(user) > 0) {
-			return ResultData.success();
+			return ResultData.result(true);
 		}
-		return ResultData.error();
+		return ResultData.result(false);
 	}
 
 
@@ -113,9 +115,9 @@ public class UserController extends BaseController {
 	@ResponseBody
     ResultData updatePeronal(User user) {
 		if (userService.updatePersonal(user) > 0) {
-			return ResultData.success();
+			return ResultData.result(true);
 		}
-		return ResultData.error();
+		return ResultData.result(false);
 	}
 
 
@@ -125,9 +127,9 @@ public class UserController extends BaseController {
 	@ResponseBody
     ResultData remove(Long id) {
 		if (userService.delete(id) > 0) {
-			return ResultData.success();
+			return ResultData.result(true);
 		}
-		return ResultData.error();
+		return ResultData.result(false);
 	}
 
 	@RequiresPermissions("sys:user:batchRemove")
@@ -137,9 +139,9 @@ public class UserController extends BaseController {
     ResultData batchRemove(@RequestParam("ids[]") Long[] userIds) {
 		int r = userService.batchDelete(userIds);
 		if (r > 0) {
-			return ResultData.success();
+			return ResultData.result(true);
 		}
-		return ResultData.error();
+		return ResultData.result(false);
 	}
 
 	@PostMapping("/exit")

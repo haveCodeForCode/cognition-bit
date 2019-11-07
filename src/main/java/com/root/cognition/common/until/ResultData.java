@@ -5,6 +5,8 @@ import com.root.cognition.common.config.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Map;
+
 /**
  * 返回功能函数
  * @author Worry
@@ -75,6 +77,7 @@ public class ResultData {
                 .setMsg(result ? Constant.DEFAULT_SUCCESS_MSG : Constant.SERVER_ERROR_MSG)
                 .setData(object);
     }
+
 
 
     public boolean isSuccess() {

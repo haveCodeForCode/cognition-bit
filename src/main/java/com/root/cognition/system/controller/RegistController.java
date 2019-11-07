@@ -209,16 +209,16 @@ public class RegistController extends BaseController {
                 String randomkey = mobile + "random";
                 String reidsState = redisService.redisSet(randomkey, randomNumber, 0);
                 if (StringUtils.isNotEmpty(reidsState)) {
-                    return ResultData.success("发送成功");
+                    return ResultData.result(true,"发送成功");
                 } else {
-                    return ResultData.error("发送失败");
+                    return ResultData.result(false,"发送失败");
                 }
             } else {
-                return ResultData.error("发送失败");
+                return ResultData.result(false,"发送失败");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return ResultData.error("发送失败");
+            return ResultData.result(false,"发送失败");
         }
     }
 

@@ -2,11 +2,11 @@ package com.root.cognition.system.controller;
 
 
 import com.root.cognition.common.config.Constant;
+import com.root.cognition.common.until.Query;
 import com.root.cognition.common.until.ResultData;
+import com.root.cognition.system.entity.Dept;
 import com.root.cognition.system.persistence.BaseController;
 import com.root.cognition.system.persistence.Tree;
-import com.root.cognition.common.until.Query;
-import com.root.cognition.system.entity.Dept;
 import com.root.cognition.system.service.DeptService;
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -96,9 +96,9 @@ public class DeptController extends BaseController {
 		//根据权限存放的
 		dept.setCreateBy(getUserId());
 		if (deptService.save(dept) > 0) {
-			return ResultData.success();
+			return ResultData.result(true);
 		}
-		return ResultData.error();
+		return ResultData.result(false);
 	}
 
 	/**
@@ -109,9 +109,9 @@ public class DeptController extends BaseController {
 	@RequiresPermissions("system:dept:edit")
 	public ResultData update(Dept dept) {
 		if (deptService.update(dept) > 0) {
-			return ResultData.success();
+			return ResultData.result(true);
 		}
-		return ResultData.error();
+		return ResultData.result(false);
 	}
 
 	/**
@@ -124,16 +124,16 @@ public class DeptController extends BaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("parentId", deptId);
 		if(deptService.count(map)>0) {
-			return ResultData.customMap(1, "包含下级部门,不允许修改",null);
+			return ResultData.result(false, "包含下级部门,不允许修改");
 		}
 		if(deptService.checkDeptHasUser(deptId)) {
 			if (deptService.delete(deptId) > 0) {
-				return ResultData.error();
+				return ResultData.result(false);
 			}
 		}else {
-			return ResultData.customMap(1, "部门包含用户,不允许修改",null);
+			return ResultData.result(false, "部门包含用户,不允许修改");
 		}
-		return ResultData.error();
+		return ResultData.result(false);
 	}
 
 	/**
@@ -144,7 +144,7 @@ public class DeptController extends BaseController {
 	@RequiresPermissions("system:dept:batchRemove")
 	public ResultData remove(@RequestParam("ids[]") Long[] deptIds) {
 		deptService.batchDelete(deptIds);
-		return ResultData.success();
+		return ResultData.result(true);
 	}
 
 	@GetMapping("/tree")

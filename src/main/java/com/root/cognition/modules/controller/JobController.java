@@ -65,7 +65,7 @@ public class JobController extends BaseController {
 	@RequestMapping("/info/{id}")
 	public ResultData info(@PathVariable("id") Long id) {
 		Task taskScheduleJob = taskScheduleJobService.get(id);
-		return ResultData.success().put("taskScheduleJob", taskScheduleJob);
+		return ResultData.result(true, taskScheduleJob);
 	}
 
 	/**
@@ -75,9 +75,9 @@ public class JobController extends BaseController {
 	@PostMapping("/save")
 	public ResultData save(Task taskScheduleJob) {
 		if (taskScheduleJobService.save(taskScheduleJob) > 0) {
-			return ResultData.success();
+			return ResultData.result(true);
 		}
-		return ResultData.error();
+		return ResultData.result(false);
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class JobController extends BaseController {
 	@PostMapping("/update")
 	public ResultData update(Task taskScheduleJob) {
 		taskScheduleJobService.update(taskScheduleJob);
-		return ResultData.success();
+		return ResultData.result(true);
 	}
 
 	/**
@@ -97,9 +97,9 @@ public class JobController extends BaseController {
 	@ResponseBody
 	public ResultData remove(Long id) {
 		if (taskScheduleJobService.remove(id) > 0) {
-			return ResultData.success();
+			return ResultData.result(true);
 		}
-		return ResultData.error();
+		return ResultData.result(false);
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class JobController extends BaseController {
 	@ResponseBody
 	public ResultData remove(@RequestParam("ids[]") Long[] ids) {
 		taskScheduleJobService.batchRemove(ids);
-		return ResultData.success();
+		return ResultData.result(true);
 	}
 
 	@PostMapping(value = "/changeJobStatus")
@@ -123,11 +123,11 @@ public class JobController extends BaseController {
 		}
 		try {
 			taskScheduleJobService.changeStatus(id, cmd);
-			return ResultData.success("任务" + label + "成功");
+			return ResultData.result(true,"任务" + label + "成功");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ResultData.success("任务" + label + "失败");
+		return ResultData.result(false,"任务" + label + "失败");
 	}
 
 }
