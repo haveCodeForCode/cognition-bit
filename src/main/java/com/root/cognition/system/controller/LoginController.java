@@ -9,8 +9,6 @@ import com.root.cognition.system.entity.User;
 import com.root.cognition.system.persistence.BaseController;
 import com.root.cognition.system.service.MenuService;
 import com.root.cognition.system.service.UserService;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.shiro.authc.AuthenticationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,6 +44,7 @@ public class LoginController extends BaseController {
     public void setMenuService(MenuService menuService) {
         this.menuService = menuService;
     }
+
 
 
     /**
@@ -90,12 +88,7 @@ public class LoginController extends BaseController {
         //创建令牌
         String jwtToken = JwtUtil.sign(userId, password);
 
-        try {
-            return ResultData.result(true).setData(jwtToken);
-        } catch (AuthenticationException e) {
-            logger.info(e.getMessage());
-            return ResultData.result(false).setMsg(e.getMessage());
-        }
+        return ResultData.result(true).setData(jwtToken);
     }
 
     /**

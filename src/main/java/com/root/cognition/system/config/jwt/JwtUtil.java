@@ -13,6 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 /**
+ * Jwt token工具，提供JWT生成效验
  * @author Worry
  * @version 2019/9/27
  */

@@ -53,7 +53,7 @@ public class ResultData {
     /**
      * 回传带消息
      * @param result
-     * @param object
+     * @param msg
      * @return
      */
     public static ResultData result(boolean result, String msg) {

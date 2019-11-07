@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * JWT拦截器
  * @author Worry
  * @version 2019/9/27
  */
