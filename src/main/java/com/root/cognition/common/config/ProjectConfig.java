@@ -22,8 +22,16 @@ public class ProjectConfig {
         return uploadPath;
     }
 
+    public void setUploadPath(String uploadPath) {
+        this.uploadPath = uploadPath;
+    }
+
     public Integer getJwtTime() {
         return jwtTime;
+    }
+
+    public void setJwtTime(Integer jwtTime) {
+        this.jwtTime = jwtTime;
     }
 
     public String getJwtLoginSign() {
@@ -32,13 +40,5 @@ public class ProjectConfig {
 
     public void setJwtLoginSign(String jwtLoginSign) {
         this.jwtLoginSign = jwtLoginSign;
-    }
-
-    public void setJwtTime(Integer jwtTime) {
-        this.jwtTime = jwtTime;
-    }
-
-    public void setUploadPath(String uploadPath) {
-        this.uploadPath = uploadPath;
     }
 }

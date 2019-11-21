@@ -1,6 +1,6 @@
-# cognition
+# cognition-vue
 
-> A Vue.js project
+> a vue of cognition
 
 ## Build Setup
 

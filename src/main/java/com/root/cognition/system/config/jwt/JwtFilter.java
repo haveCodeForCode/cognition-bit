@@ -1,11 +1,12 @@
 package com.root.cognition.system.config.jwt;
 
 import com.root.cognition.common.config.ProjectConfig;
+import com.root.cognition.system.config.ApplicationContextRegister;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -17,14 +18,6 @@ import javax.servlet.http.HttpServletResponse;
  * @version 2019/9/27
  */
 public class JwtFilter extends BasicHttpAuthenticationFilter {
-
-
-    private ProjectConfig projectConfig;
-
-    @Resource
-    public void setProjectConfig(ProjectConfig projectConfig) {
-        this.projectConfig = projectConfig;
-    }
 
 
     /**
@@ -40,6 +33,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
         //登陆标识，配置文件控制
         HttpServletRequest req = (HttpServletRequest) request;
         //登陆标识
+        ProjectConfig projectConfig = ApplicationContextRegister.getBean(ProjectConfig.class);
         String loginSign = projectConfig.getJwtLoginSign();
         String authorization = req.getHeader(loginSign);
         return authorization != null;
@@ -50,6 +44,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest req = (HttpServletRequest) request;
         //登陆标识
+        ProjectConfig projectConfig = ApplicationContextRegister.getBean(ProjectConfig.class);
         String loginSign = projectConfig.getJwtLoginSign();
         String header = req.getHeader(loginSign);
         JwtToken token = new JwtToken(header);

@@ -34,7 +34,6 @@ public interface UserService {
 	boolean exit(Map<String, Object> params);
 
 
-
 	/**
 	 * 根据部门获取用户树
 	 *
@@ -42,7 +41,7 @@ public interface UserService {
 	 */
 	Tree<Dept> getTree();
 
-	//	int resetPwd(UserVO userVO, UserDO userDO) throws Exception;
+//	int resetPwd(UserVO userVO, UserDO userDO) throws Exception;
 //
 //	int adminResetPwd(UserVO userVO) throws Exception;
 
