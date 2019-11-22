@@ -7,6 +7,7 @@ import store from './store'
 import axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import 'font-awesome/css/font-awesome.min.css'
 
 Vue.prototype.$axios = axios;
 Vue.prototype.api = 'http://127.0.0.1:8090';
@@ -60,7 +61,6 @@ axios.interceptors.response.use(
   error => {
     if (error.response) {
       if (error.response.status ==='401') {
-        console.log("token异步请求判断过期");
         localStorage.removeItem('Authorization');
         this.$router.push('/');
       }
