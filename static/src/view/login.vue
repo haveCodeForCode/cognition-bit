@@ -79,20 +79,32 @@
                 };
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        console.log(valid);
                         this.$axios({
                             method: 'post',
                             url: this.api + '/login',
                             data: Qs.stringify(data),
                             headers: {
-                                "Authorization": " "
+                                "Authorization": ""
                             }
                         }).then(res => {  //res是返回结果
-                            console.log(res);
                             //判断是否成功
                             if (res.data.success) {
-                                _this.userToken = 'Bearer ' + res.data.data;
+                                console.log(res);
+                                //获取值
+                                _this.userToken = 'Bearer ' + res.data.data.token;
+                                let sysMenus = res.data.data.user.sysMenus;
+                                //声明菜单数组
+                                let menus = [];
+                                sysMenus.forEach(function(value, index, array){
+                                    let menu = {
+                                        id:value.id,
+                                        name:value.name,
+                                        icon:value.icon
+                                    };
+                                    menus.push(menu);
+                                });
                                 _this.changeLogin({Authorization: _this.userToken});
+                                localStorage.setItem("menus",menus);
                                 this.$message("登录成功！");
                                 this.$router.push('/home');
                             } else {

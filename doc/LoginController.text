@@ -1,17 +1,17 @@
 package com.root.cognition.system.controller;
 
-import com.root.cognition.common.config.Constant;
-import com.root.cognition.system.persistence.BaseController;
-import com.root.cognition.system.persistence.Tree;
-import com.root.cognition.common.until.RandomValidateCodeUtil;
-import com.root.cognition.common.until.ResultData;
-import com.root.cognition.common.until.StringUtils;
-import com.root.cognition.common.until.encrypt.Md5Utils;
-import com.root.cognition.system.entity.Menu;
-import com.root.cognition.system.entity.User;
-import com.root.cognition.system.service.MenuService;
-import com.root.cognition.system.service.UserService;
-import com.root.cognition.system.vo.UserVo;
+import Constant;
+import BaseController;
+import Tree;
+import RandomValidateCodeUtil;
+import ResultData;
+import StringUtils;
+import Md5Utils;
+import Menu;
+import User;
+import MenuService;
+import UserService;
+import UserVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -101,19 +101,19 @@ public class LoginController extends BaseController {
     @GetMapping("/toInterface")
     String toInterface(Model model) {
         if (getUser() != null) {
-            UserVo userVo = userService.getbyUserId(getUserId());
-            List<Menu> menuList = userVo.getMenus();
+            UserVo sysUserVo = userService.getbyUserId(getUserId());
+            List<Menu> sysMenuList = sysUserVo.getMenus();
             //删除菜单父级，只展示详细的菜单
-            if (menuList !=null && menuList.size()>0) {
-                List<Menu> menus = new ArrayList<>(menuList);
-                for (Menu menu:menuList){
-                    if (menu.getParentId().toString().equals(Constant.STRING_ZERO)){
-                        menus.remove(menu);
+            if (sysMenuList !=null && sysMenuList.size()>0) {
+                List<Menu> sysMenus = new ArrayList<>(sysMenuList);
+                for (Menu sysMenu:sysMenuList){
+                    if (sysMenu.getParentId().toString().equals(Constant.STRING_ZERO)){
+                        sysMenus.remove(sysMenu);
                     }
                 }
-                model.addAttribute("menus", menus);
+                model.addAttribute("sysMenus", sysMenus);
             }
-            model.addAttribute("userInfo", userVo.getUserInfo());
+            model.addAttribute("sysUserInfo", sysUserVo.getUserInfo());
         }
         return "interface";
     }
@@ -128,20 +128,20 @@ public class LoginController extends BaseController {
     @GetMapping(value = "/index")
     String toindex(Model model) {
         //获取用户菜单
-        List<Tree<Menu>> menus = menuService.listMenuTree(getUserId());
-        UserVo userVo= userService.getbyUserId(getUserId());
-        model.addAttribute("userInfo",userVo.getUserInfo());
-        model.addAttribute("menus", menus);
+        List<Tree<Menu>> sysMenus = menuService.listMenuTree(getUserId());
+        UserVo sysUserVo= userService.getbyUserId(getUserId());
+        model.addAttribute("sysUserInfo",sysUserVo.getUserInfo());
+        model.addAttribute("sysMenus", sysMenus);
         return "index_v1";
     }
 
 
 //    @RequestMapping(value = "/index")
 //    String index(Model model) {
-//        List<Tree<Menu>> menus = menuService.listMenuTree(getUserId());
+//        List<Tree<Menu>> sysMenus = menuService.listMenuTree(getUserId());
 //        Map<String,Object> query = Query.withDelFlag();
 //        query.put("userId",getUserId());
-//        UserInfo userInfo = userInfoService.get(query);
+//        UserInfo sysUserInfo = userInfoService.get(query);
 
 //        model.addAttribute("name", );
 //        FileDO fileDO = fileService.get(getUser().getPicId());
@@ -154,8 +154,8 @@ public class LoginController extends BaseController {
 //        } else {
 //            model.addAttribute("picUrl", "/img/photo_s.jpg");
 //        }
-//        model.addAttribute("menus", menus);
-//        model.addAttribute("username", userInfo.getUserName());
+//        model.addAttribute("sysMenus", sysMenus);
+//        model.addAttribute("username", sysUserInfo.getUserName());
 //        return "index_v1";
 //    }
 
@@ -185,14 +185,14 @@ public class LoginController extends BaseController {
             return ResultMap.error("验证码校验失败");
         }
 
-        User user = userService.getWihtLogininfo(loginInfo);
-        if (user != null) {
-            loginInfo = String.valueOf(user.getId());
+        User sysUser = userService.getWihtLogininfo(loginInfo);
+        if (sysUser != null) {
+            loginInfo = String.valueOf(sysUser.getId());
         } else {
             return ResultMap.error("用户尚未注册~！");
         }
 
-        password = Md5Utils.encrypt(user.getId().toString(), password);
+        password = Md5Utils.encrypt(sysUser.getId().toString(), password);
         //创建令牌
         UsernamePasswordToken token = new UsernamePasswordToken(loginInfo, password);
         Subject subject = SecurityUtils.getSubject();

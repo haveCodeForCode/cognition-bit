@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.root.cognition.system.dao.UserDao">
+<mapper namespace="com.cognition.bit.system.dao.UserDao">
 
 
     <!--模糊查询手机与邮箱-->
-    <select id="getWihtLogininfo" resultType="com.root.cognition.system.entity.User">
+    <select id="getWihtLogininfo" resultType="com.cognition.bit.system.entity.SysUser">
         SELECT
           <include refid="userColumns"/>
         FROM
@@ -16,7 +16,7 @@
 
 
     <!--*********************************************************************-->
-    <select id="get" resultType="com.root.cognition.system.entity.User">
+    <select id="get" resultType="com.cognition.bit.system.entity.SysUser">
         SELECT
         <include refid="userColumns"/>
         FROM
@@ -25,7 +25,7 @@
         a.user_id = #{value}
     </select>
 
-    <select id="getByEntity" resultType="com.root.cognition.system.entity.User">
+    <select id="getByEntity" resultType="com.cognition.bit.system.entity.SysUser">
         SELECT
         <include refid="userColumns"/>
         FROM
@@ -68,7 +68,7 @@
         </where>
     </select>
 
-    <select id="findList" resultType="com.root.cognition.system.entity.User">
+    <select id="findList" resultType="com.cognition.bit.system.entity.SysUser">
         SELECT
         <include refid="userColumns"/>
         FROM sys_user a
@@ -164,7 +164,7 @@
         </where>
     </select>
 
-    <insert id="insert" parameterType="com.root.cognition.system.entity.User">
+    <insert id="insert" parameterType="com.cognition.bit.system.entity.SysUser">
         INSERT INTO sys_user
 		(
         `user_id`,
@@ -203,7 +203,7 @@
 		)
 	</insert>
 
-    <update id="update" parameterType="com.root.cognition.system.entity.User">
+    <update id="update" parameterType="com.cognition.bit.system.entity.SysUser">
         UPDATE sys_user
         <set>
             <if test="loginName != null and loginName !=''">

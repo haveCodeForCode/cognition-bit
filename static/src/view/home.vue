@@ -12,11 +12,11 @@
 <!--            <img src="">-->
             {{sysUserName}}
           </span>
-          <el-dropdown-menu slot="dropdown">
+          <el-dropdown-sysMenu slot="dropdown">
             <el-dropdown-item>我的消息</el-dropdown-item>
             <el-dropdown-item>设置</el-dropdown-item>
             <el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
-          </el-dropdown-menu>
+          </el-dropdown-sysMenu>
         </el-dropdown>
       </el-col>
     </el-col>
@@ -24,22 +24,22 @@
     <!--栅格系统体-->
     <el-col :span="24" class="main">
       <!--侧边栏-->
-      <aside :class="collapsed?'menu-collapsed':'menu-expanded'">
-        <el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
+      <aside :class="collapsed?'sysMenu-collapsed':'sysMenu-expanded'">
+        <el-sysMenu :default-active="$route.path" class="el-sysMenu-vertical-demo" @open="handleOpen" @close="handleClose"
                  @select="handleSelect"
                  unique-opened router v-show="!collapsed">
           <template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
             <el-submenu :index="index+''" v-if="!item.leaf">
               <template slot="title"><i :class="item.iconCls"></i>{{item.name}}</template>
-              <el-menu-item v-for="child in item.children" :index="child.path" :key="child.path" v-if="!child.hidden">
+              <el-sysMenu-item v-for="child in item.children" :index="child.path" :key="child.path" v-if="!child.hidden">
                 {{child.name}}
-              </el-menu-item>
+              </el-sysMenu-item>
             </el-submenu>
-            <el-menu-item v-if="item.leaf&&item.children.length>0" :index="item.children[0].path"><i
+            <el-sysMenu-item v-if="item.leaf&&item.children.length>0" :index="item.children[0].path"><i
               :class="item.iconCls"></i>{{item.children[0].name}}
-            </el-menu-item>
+            </el-sysMenu-item>
           </template>
-        </el-menu>
+        </el-sysMenu>
       </aside>
 
       <section class="content-container">
@@ -111,11 +111,11 @@
                 this.$refs.menuCollapsed.getElementsByClassName('submenu-hook-' + i)[0].style.display = status ? 'block' : 'none';
             }
         }, mounted() {
-            let user = localStorage.getItem('user');
-            if (user) {
-                user = JSON.parse(user);
-                this.sysName = user.name || '';
-                this.sysUserAvatar = user.sysUserAvatar || '';
+            let sysUser = localStorage.getItem('sysUser');
+            if (sysUser) {
+                sysUser = JSON.parse(sysUser);
+                this.sysName = sysUser.name || '';
+                this.sysUserAvatar = sysUser.sysUserAvatar || '';
             }
         }
         // name: ""
@@ -217,7 +217,7 @@
     /*bottom: 0 px;*/
   }
 
-  .el-menu {
+  .el-sysMenu {
     height: 100%;
   }
 
@@ -238,12 +238,12 @@
     display: none;
   }
 
-  .menu-collapsed {
+  .sysMenu-collapsed {
     flex: 0 0 60px;
     width: 60px;
   }
 
-  .menu-expanded {
+  .sysMenu-expanded {
     flex: 0 0 230px;
     width: 230px;
     padding-top: 100px;

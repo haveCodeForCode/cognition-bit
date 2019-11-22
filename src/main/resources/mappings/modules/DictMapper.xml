@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.root.cognition.modules.dao.DictDao">
+<mapper namespace="com.cognition.bit.modules.dao.DictDao">
 
 
 
 	<!--***********************************************************************-->
-	<select id="get" resultType="com.root.cognition.modules.entity.Dict">
+	<select id="get" resultType="com.cognition.bit.modules.entity.ModDict">
 		select
 		<include refid="dictColumns"/>
 		from mod_dict a
@@ -14,7 +14,7 @@
 		a.dict_id = #{value}
 	</select>
 
-	<select id="getByEntity" resultType="com.root.cognition.modules.entity.Dict">
+	<select id="getByEntity" resultType="com.cognition.bit.modules.entity.ModDict">
 		select
 			<include refid="dictColumns"/>
 		from mod_dict a
@@ -47,7 +47,7 @@
 		</where>
 	</select>
 
-	<select id="findList" resultType="com.root.cognition.modules.entity.Dict">
+	<select id="findList" resultType="com.cognition.bit.modules.entity.ModDict">
 		select
 		<include refid="dictColumns"/>
 		from mod_dict a
@@ -122,7 +122,7 @@
 		</where>
 	</select>
 
-	<insert id="insert" parameterType="com.root.cognition.modules.entity.Dict"
+	<insert id="insert" parameterType="com.cognition.bit.modules.entity.ModDict"
 			useGeneratedKeys="true" keyProperty="id">
 		insert into mod_dict
 		(
@@ -156,7 +156,7 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="com.root.cognition.modules.entity.Dict">
+	<update id="update" parameterType="com.cognition.bit.modules.entity.ModDict">
 		update mod_dict
 		<set>
 			<if test="name != null">

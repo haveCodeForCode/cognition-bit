@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.root.cognition.modules.dao.SmsLogDao">
+<mapper namespace="com.cognition.bit.modules.dao.SmsLogDao">
 
-    <select id="get" resultType="com.root.cognition.modules.entity.SmsLog">
+    <select id="get" resultType="com.cognition.bit.modules.entity.ModSmsLog">
         select
         <include refid="smsLogColumns"/>
         from
@@ -11,7 +11,7 @@
         where smslog_id = #{value}
     </select>
 
-    <select id="findList" resultType="com.root.cognition.modules.entity.SmsLog">
+    <select id="findList" resultType="com.cognition.bit.modules.entity.ModSmsLog">
         select
         <include refid="smsLogColumns"/>
         from mod_sms_log
@@ -96,7 +96,7 @@
         </where>
     </select>
 
-    <insert id="insert" parameterType="com.root.cognition.modules.entity.SmsLog">
+    <insert id="insert" parameterType="com.cognition.bit.modules.entity.ModSmsLog">
 		insert into mod_sms_log
 		(
 			`smslog_id`,
@@ -125,7 +125,7 @@
 		)
 	</insert>
 
-    <update id="update" parameterType="com.root.cognition.modules.entity.SmsLog">
+    <update id="update" parameterType="com.cognition.bit.modules.entity.ModSmsLog">
         update mod_sms_log
         <set>
             <if test="module != null">

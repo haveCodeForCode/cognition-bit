@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.root.cognition.system.dao.UserDao">
+<mapper namespace="UserDao">
 
 
     <!--////////***************基础方法*******************///////-->
 
     <!-- 根据id获得用户 -->
-    <select id="get" parameterType="string" resultType="com.root.cognition.system.dao.UserDao">
+    <select id="get" parameterType="string" resultType="UserDao">
         SELECT
         <include refid="userColumns"/>
         FROM sys_user a
@@ -15,8 +15,8 @@
     </select>
 
     <!--获取的条件都是user表里的唯一值-->
-    <select id="getByEntity" parameterType="com.root.cognition.system.dao.UserDao"
-            resultType="com.root.cognition.system.dao.UserDao">
+    <select id="getByEntity" parameterType="UserDao"
+            resultType="UserDao">
         SELECT
         <include refid="userColumns"/>
         FROM sys_user a
@@ -38,7 +38,7 @@
     </select>
 
     <!--多条查询用户信息 -->
-    <select id="findList" resultType="com.root.cognition.system.dao.UserDao">
+    <select id="findList" resultType="UserDao">
         SELECT
         <include refid="userColumns"/>
         FROM sys_user a

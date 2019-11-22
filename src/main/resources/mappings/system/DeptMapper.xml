@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.root.cognition.system.dao.DeptDao">
+<mapper namespace="com.cognition.bit.system.dao.DeptDao">
 
 	<select id="listAllDept">
         SELECT DISTINCT dept_id FROM sys_user
@@ -13,7 +13,7 @@
 	</select>
 
 	<!--***********************************************************************-->
-	<select id="get" resultType="com.root.cognition.system.entity.Dept">
+	<select id="get" resultType="com.cognition.bit.system.entity.SysDept">
 		SELECT
 		<include refid="deptColumns"/>
 		FROM
@@ -21,7 +21,7 @@
 		WHERE a.dept_id = #{value}
 	</select>
 
-	<select id="getByEntity" resultType="com.root.cognition.system.entity.Dept">
+	<select id="getByEntity" resultType="com.cognition.bit.system.entity.SysDept">
 		SELECT
 		<include refid="deptColumns"/>
 		FROM
@@ -55,7 +55,7 @@
 		</where>
 	</select>
 
-	<select id="findList" resultType="com.root.cognition.system.entity.Dept">
+	<select id="findList" resultType="com.cognition.bit.system.entity.SysDept">
 		SELECT
 		<include refid="deptColumns"/>
 		FROM sys_dept a
@@ -130,7 +130,7 @@
 		</where>
 	</select>
 
-	<insert id="insert" parameterType="com.root.cognition.system.entity.Dept">
+	<insert id="insert" parameterType="com.cognition.bit.system.entity.SysDept">
 		insert into sys_dept
 		(
 			`dept_id`,
@@ -157,7 +157,7 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="com.root.cognition.system.entity.Dept">
+	<update id="update" parameterType="com.cognition.bit.system.entity.SysDept">
 		UPDATE sys_dept
 		<set>
 			<if test="parentId != null and parentId !=''">

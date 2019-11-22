@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.root.cognition.system.dao.MenuDao">
+<mapper namespace="com.cognition.bit.system.dao.MenuDao">
 
-	<select id="listMenuByUserId" resultType="com.root.cognition.system.entity.Menu">
+	<select id="listMenuByUserId" resultType="com.cognition.bit.system.entity.SysMenu">
 		select
 		  <include refid="menuColumns"/>
 		from sys_menu a
@@ -25,7 +25,7 @@
 
 	<!--**************************************************************************-->
 
-	<select id="get" resultType="com.root.cognition.system.entity.Menu">
+	<select id="get" resultType="com.cognition.bit.system.entity.SysMenu">
 		SELECT
 		<include refid="menuColumns"/>
 		FROM
@@ -34,7 +34,7 @@
 		a.menu_id = #{value}
 	</select>
 
-	<select id="getByEntity" resultType="com.root.cognition.system.entity.Menu">
+	<select id="getByEntity" resultType="com.cognition.bit.system.entity.SysMenu">
 		select
 		<include refid="menuColumns"/>
 		from sys_menu a
@@ -78,7 +78,7 @@
 		</where>
 	</select>
 
-	<select id="findList" resultType="com.root.cognition.system.entity.Menu">
+	<select id="findList" resultType="com.cognition.bit.system.entity.SysMenu">
 		select
 		<include refid="menuColumns"/>
 		from sys_menu a
@@ -177,7 +177,7 @@
 		</where>
 	</select>
 
-	<insert id="insert" parameterType="com.root.cognition.system.entity.Menu">
+	<insert id="insert" parameterType="com.cognition.bit.system.entity.SysMenu">
 		insert into sys_menu
 		(
 		`menu_id`,
@@ -212,7 +212,7 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="com.root.cognition.system.entity.Menu">
+	<update id="update" parameterType="com.cognition.bit.system.entity.SysMenu">
 		update sys_menu
 		<set>
 			<if test="parentId != null and parentId !=''">

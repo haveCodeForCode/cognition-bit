@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.root.cognition.system.dao.UserRoleDao">
+<mapper namespace="com.cognition.bit.system.dao.UserRoleDao">
 
 	<!--*********************************************************************-->
 
-	<select id="get" resultType="com.root.cognition.system.entity.UserRole">
+	<select id="get" resultType="com.cognition.bit.system.entity.SysUserRole">
 		select
 		  `id`,`user_id`,`role_id`
 		from
@@ -14,7 +14,7 @@
 		  id = #{value}
 	</select>
 
-	<select id="getByEntity" resultType="com.root.cognition.system.entity.UserRole">
+	<select id="getByEntity" resultType="com.cognition.bit.system.entity.SysUserRole">
 		select
 		  `id`,`user_id`,`role_id`
 		from
@@ -32,7 +32,7 @@
 		</where>
 	</select>
 
-	<select id="findList" resultType="com.root.cognition.system.entity.UserRole">
+	<select id="findList" resultType="com.cognition.bit.system.entity.SysUserRole">
 		select
 		  `id`,`user_id`,`role_id`
         from
@@ -70,7 +70,7 @@
 		</where>
 	</select>
 
-	<insert id="insert" parameterType="com.root.cognition.system.entity.UserRole">
+	<insert id="insert" parameterType="com.cognition.bit.system.entity.SysUserRole">
 		insert into sys_user_role
 		(
 		`id`,
@@ -85,7 +85,7 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="com.root.cognition.system.entity.UserRole">
+	<update id="update" parameterType="com.cognition.bit.system.entity.SysUserRole">
 		update sys_user_role
 		<set>
 			<if test="userId != null">`user_id` = #{userId}, </if>

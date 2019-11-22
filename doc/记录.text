@@ -26,8 +26,8 @@ Dept get(Long deptId);
 Dept get(Map<String, Object> map);
 List<Dept> findList(Map<String, Object> map);
 int count(Map<String, Object> map);
-int save(Dept dept);
-int update(Dept dept);
+int save(Dept sysDept);
+int update(Dept sysDept);
 int delete(Long deptId);
 int batchDelete(Long[] deptIds);
 

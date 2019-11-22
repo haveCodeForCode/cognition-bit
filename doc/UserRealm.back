@@ -1,11 +1,11 @@
 package com.root.cognition.system.config.shiro;
 
 
-import com.root.cognition.common.config.Constant;
-import com.root.cognition.system.config.ApplicationContextRegister;
-import com.root.cognition.system.dao.UserDao;
-import com.root.cognition.system.entity.User;
-import com.root.cognition.system.service.MenuService;
+import Constant;
+import ApplicationContextRegister;
+import UserDao;
+import User;
+import MenuService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -37,23 +37,23 @@ public class UserRealm extends AuthorizingRealm {
 
 		UserDao userDao = ApplicationContextRegister.getBean(UserDao.class);
 		// 查询用户信息
-		User user = userDao.get(Long.valueOf(loginInfo));
+		User sysUser = userDao.get(Long.valueOf(loginInfo));
 
 		// 账号不存在
-		if (user == null) {
+		if (sysUser == null) {
 			throw new UnknownAccountException("账号或密码不正确");
 		}
 
 		// 密码错误
-		if (!password.equals(user.getUserPassword())) {
+		if (!password.equals(sysUser.getUserPassword())) {
 			throw new IncorrectCredentialsException("账号或密码不正确");
 		}
 
 		// 账号锁定
-		if (user.getDelFlag() == Constant.STRING_ZERO) {
+		if (sysUser.getDelFlag() == Constant.STRING_ZERO) {
 			throw new LockedAccountException("账号已被锁定,请联系管理员");
 		}
-		return new SimpleAuthenticationInfo(user, password, getName());
+		return new SimpleAuthenticationInfo(sysUser, password, getName());
 	}
 
 }

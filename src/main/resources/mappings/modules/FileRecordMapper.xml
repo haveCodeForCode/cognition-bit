@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.root.cognition.modules.dao.FileRecordDao">
+<mapper namespace="com.cognition.bit.modules.dao.FileRecordDao">
 
-    <select id="get" resultType="com.root.cognition.modules.entity.FileRecord">
+    <select id="get" resultType="com.cognition.bit.modules.entity.ModFileRecord">
         select
             <include refid="flieRecordColumns"/>
         from
@@ -12,7 +12,7 @@
          file_id = #{value}
     </select>
 
-    <select id="findList" resultType="com.root.cognition.modules.entity.FileRecord">
+    <select id="findList" resultType="com.cognition.bit.modules.entity.ModFileRecord">
         select
             <include refid="flieRecordColumns"/>
         from mod_file
@@ -79,7 +79,7 @@
         </where>
     </select>
 
-    <insert id="insert" parameterType="com.root.cognition.modules.entity.FileRecord">
+    <insert id="insert" parameterType="com.cognition.bit.modules.entity.ModFileRecord">
 		insert into mod_file
 		(
 		    `file_id`,
@@ -106,7 +106,7 @@
 		)
 	</insert>
 
-    <update id="update" parameterType="com.root.cognition.modules.entity.FileRecord">
+    <update id="update" parameterType="com.cognition.bit.modules.entity.ModFileRecord">
         update mod_file
         <set>
             <if test="fileName != null">

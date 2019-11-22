@@ -1,10 +1,10 @@
 package com.root.cognition.system.config.shiro;
 
-//import com.root.cognition.system.config.ApplicationContextRegister;
-//import com.root.cognition.system.dao.UserDao;
-//import com.root.cognition.system.entity.User;
-//import com.root.cognition.system.service.MenuService;
-//import com.root.cognition.system.service.UserService;
+//import ApplicationContextRegister;
+//import UserDao;
+//import User;
+//import MenuService;
+//import UserService;
 //import org.apache.shiro.authc.*;
 //import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 //import org.apache.shiro.authz.AuthorizationInfo;

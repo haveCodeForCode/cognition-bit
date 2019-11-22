@@ -15,16 +15,16 @@
         <!--导航栏-->
         <div class="row border-bottom">
             <ul class="layui-nav">
-                <li class="layui-nav-item" style="float:right;" th:if="${userInfo} != null">
+                <li class="layui-nav-item" style="float:right;" th:if="${sysUserInfo} != null">
                     <a href="/logout">退出</a>
                 </li>
-                <li class="layui-nav-item" style="float:right;" th:if="${userInfo} == null">
+                <li class="layui-nav-item" style="float:right;" th:if="${sysUserInfo} == null">
                     <a href="javascript:;" onclick="openLogin()">登陆</a>
                 </li>
 
-                <li class="layui-nav-item" style="float:right;" th:if="${userInfo} != null">
+                <li class="layui-nav-item" style="float:right;" th:if="${sysUserInfo} != null">
                     <a href="javascript:;"><img class="layui-nav-img" src="//t.cn/RCzsdCq">
-                        <span th:text="${userInfo.userName}">未登录</span></a>
+                        <span th:text="${sysUserInfo.userName}">未登录</span></a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;">修改信息</a></dd>
                         <dd><a href="javascript:;">安全管理</a></dd>
@@ -37,7 +37,7 @@
             </ul>
         </div>
 
-        <div class="top" id="menu-box">
+        <div class="top" id="sysMenu-box">
             <ul></ul>
         </div>
     </div>
@@ -62,25 +62,25 @@
         });
     }
 
-    var menus;
+    var sysMenus;
     $(document).ready(function () {
-        menus = [[${menus}]];
+        sysMenus = [[${sysMenus}]];
         var menuStr ='';
-        if (menus && menus !== '') {
-            $.each(menus, function (index, el) {
+        if (sysMenus && sysMenus !== '') {
+            $.each(sysMenus, function (index, el) {
                 menuStr += '<li>' + '<a href="javascript:void(0);" onclick="menuClick(' + el.url + ')">' + '<span>' + el.name + '</span></a></li>';
             });
         } else {
             menuStr = '<li>' + '<a href="javascript:void(0);" onclick="menuClick(' + "/login" + ')">' + '<span>' + "用户管理" + '</span></a></li>';
         }
 
-        $('#menu-box ul').append(menuStr);
+        $('#sysMenu-box ul').append(menuStr);
         menuClick();
     });
 
 
     function menuClick(i) {
-        if (menus && menus.length > 0) {
+        if (sysMenus && sysMenus.length > 0) {
             $(".main-content-frame").load(i);
         } else {
             $(".main-content-frame").load('/toHome');

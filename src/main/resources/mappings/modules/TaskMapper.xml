@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.root.cognition.modules.dao.TaskDao">
+<mapper namespace="com.cognition.bit.modules.dao.TaskDao">
 
-    <select id="get" resultType="com.root.cognition.modules.entity.Task">
+    <select id="get" resultType="com.cognition.bit.modules.entity.ModTask">
         select
         <include refid="taskColumns"/>
         from
@@ -11,7 +11,7 @@
         where task_id = #{value}
     </select>
 
-    <select id="findList" resultType="com.root.cognition.modules.entity.Task">
+    <select id="findList" resultType="com.cognition.bit.modules.entity.ModTask">
         select
         <include refid="taskColumns"/>
         from mod_task a
@@ -117,7 +117,7 @@
         </where>
     </select>
 
-    <insert id="insert" parameterType="com.root.cognition.modules.entity.Task"
+    <insert id="insert" parameterType="com.cognition.bit.modules.entity.ModTask"
             useGeneratedKeys="true" keyProperty="task_id">
 		insert into mod_task
 		(
@@ -153,7 +153,7 @@
 		)
 	</insert>
 
-    <update id="update" parameterType="com.root.cognition.modules.entity.Task">
+    <update id="update" parameterType="com.cognition.bit.modules.entity.ModTask">
         update mod_task
         <set>
             <if test="cronExpression != null">
