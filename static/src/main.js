@@ -18,21 +18,27 @@ Vue.use(ElementUI);
 
 //异步请求前判断请求的连接是否需要token
 router.beforeEach((to, from, next) => {
+  // let token = localStorage.getItem('Authorization');
+  // console.log(token);
+  //   console.log(1);
+  //   console.log("我是浏览器本地缓存的token: "+token);
+  //   if (!token || token === 'null' || token === '') {
+  //     next('/login');
+  //   } else {
+  //     next('/home');
+  //   }
   let token = localStorage.getItem('Authorization');
-  console.log(token);
+  console.log("我是浏览器本地缓存的token: " + token);
   if (to.path === '/') {
-    console.log(1);
-    console.log("我是浏览器本地缓存的token: "+token);
-    if (!token || token === 'null' || token === '') {
+    if (token == null || token === '') {
       next('/login');
     } else {
       next('/home');
     }
   } else {
-    console.log(2);
-    if (!token || token === 'null' || token === '') {
-      // next('/login');
-    }else {
+    if (token === 'null' || token === '') {
+      next('/login');
+    } else {
       next();
     }
   }
