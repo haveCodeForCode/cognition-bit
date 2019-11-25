@@ -52,46 +52,6 @@
                 this.tagsList = arr;
             })
         }
-        // methods: {
-        //     onSubmit() {
-        //
-        //     },
-        //     handleClose() {
-        //
-        //     },
-        //     handleOpen() {
-        //
-        //     },
-        //     handleSelect() {
-        //
-        //     },
-        //     //退出登录
-        //     logout: function () {
-        //         let _this = this;
-        //         this.$confirm('确认退出吗？', '提示', {
-        //             //取消则不做动作
-        //         }).then(() => {
-        //             localStorage.removeItem('Authorization');
-        //             _this.$router.push('/login');
-        //         }).catch(() => {
-        //             //报错则不做动作
-        //         });
-        //     },
-        //     collapse: function () {
-        //         this.collapsed = !this.collapsed;
-        //     },
-        //     showMenu(i, status) {
-        //         this.$refs.menuCollapsed.getElementsByClassName('submenu-hook-' + i)[0].style.display = status ? 'block' : 'none';
-        //     }
-        // }, mounted() {
-        //     let sysUser = localStorage.getItem('sysUser');
-        //     if (sysUser) {
-        //         sysUser = JSON.parse(sysUser);
-        //         this.sysName = sysUser.name || '';
-        //         this.sysUserAvatar = sysUser.sysUserAvatar || '';
-        //     }
-        // }
-        // name: ""
     }
 </script>
 

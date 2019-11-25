@@ -1,28 +1,28 @@
 <template>
 	<div class="sidebar">
-		
+
 			<el-row class="menu_page">
 				<el-col>
-					<el-menu 
-						mode="vertical" 
-						class="el-menu-vertical-demo" 
-						:collapse="collapse" 
+					<el-menu
+						mode="vertical"
+						class="el-menu-vertical-demo"
+						:collapse="collapse"
 						:default-active="$route.path"
-						background-color="#324057" 
+						background-color="#324057"
 						text-color="#fff">
 						<div class="wrapper" ref="wrapper">
 							<Menu :items='items'/>
 						</div>
 					</el-menu>
-				</el-col>	
+				</el-col>
 			</el-row>
-		
+
 	</div>
 </template>
 
 <script>
-import bus from "../common/bus";
-import Menu from "./Menu";
+import bus from "../components/bus";
+import Menu from "../components/Menu.vue";
 import Bscroll from 'better-scroll'
 // @ is an alias to /src
 export default {
@@ -159,7 +159,7 @@ export default {
 		left: 0;
 		min-height: 100%;
 		background-color: #324057;
-		z-index: 99;	
+		z-index: 99;
 	}
 	.sidebar {
 		position: relative;

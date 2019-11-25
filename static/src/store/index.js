@@ -7,14 +7,18 @@ export default new Vuex.Store({
 
   state: {
     // 存储token
-    Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : ''
+    Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
+    Menu:[]
   },
   mutations: {
     // 修改token，并将token存入localStorage
     changeLogin(state, user) {
       state.Authorization = user.Authorization;
-      console.log("store/index.js---到这里了!");
       localStorage.setItem('Authorization', user.Authorization);
+    },
+    changeMenu(state,menu){
+      state.Menu  = menu;
+      localStorage.setItem('AuthorMenu',menu);
     }
   }
 });

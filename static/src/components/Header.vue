@@ -60,11 +60,11 @@
 </template>
 
 <script>
-	import bus from '../common/bus'
-	import theme from '../common/theme'
-  //vue播放器
-	import Aplayer from 'vue-aplayer'
-	// @ is an alias to /src
+    import bus from '../components/bus'
+    import theme from '../components/theme'
+    //vue播放器
+    import aPlayer from 'vue-aplayer'
+    // @ is an alias to /src
 	export default {
 		name: 'header-nav',
 		data() {
@@ -159,8 +159,8 @@
 			}
 		},
 		components:{
-			theme,
-			Aplayer
+        theme,
+        aPlayer
 		}
 	}
 </script>

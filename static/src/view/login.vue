@@ -70,9 +70,8 @@
             }
         },
         methods: {
-            ...mapMutations(['changeLogin']),
+            ...mapMutations(['changeLogin','changeMenu']),
             submitForm(formName) {
-                let _this = this;
                 let data = {
                     'loginInfo': this.ruleForm2.account,
                     'password': this.ruleForm2.pass
@@ -89,9 +88,8 @@
                         }).then(res => {  //res是返回结果
                             //判断是否成功
                             if (res.data.success) {
-                                console.log(res);
                                 //获取值
-                                _this.userToken = 'Bearer ' + res.data.data.token;
+                                let userToken = 'Bearer ' + res.data.data.token;
                                 let sysMenus = res.data.data.user.sysMenus;
                                 //声明菜单数组
                                 let menus = [];
@@ -103,8 +101,9 @@
                                     };
                                     menus.push(menu);
                                 });
-                                _this.changeLogin({Authorization: _this.userToken});
-                                localStorage.setItem("menus",menus);
+                                //赋值vue与localStrong本地
+                                this.changeLogin({Authorization: userToken});
+                                this.changeMenu({Menus: menus});
                                 this.$message("登录成功！");
                                 this.$router.push('/home');
                             } else {

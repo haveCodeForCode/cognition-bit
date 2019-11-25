@@ -21,7 +21,8 @@ public class JwtUtil {
     /**
      * 过期时间
      */
-    private static final long EXPIRE_TIME_PRESET = 24 * 60 * 1000;
+//    private static final long EXPIRE_TIME_PRESET = 24 * 60 * 1000;
+    private static final long EXPIRE_TIME_PRESET =  1000;
 
     /**
      * 效验token是否正确
