@@ -8,7 +8,7 @@
     <!--////////***************基础方法*******************///////-->
 
     <!-- 根据id查询用户信息 -->
-    <select id="get" parameterType="string" resultType="com.cognition.bit.system.entity.SysUserInfo">
+    <select id="get" parameterType="string" resultType="com.cognition.bit.system.domain.SysUserInfo">
         SELECT
         <include refid="userInfoColumns"/>
         FROM sys_user_info a
@@ -16,7 +16,7 @@
     </select>
 
     <!--根据条件查询用户信息-->
-    <select id="getByEntity" resultType="com.cognition.bit.system.entity.SysUserInfo">
+    <select id="getByEntity" resultType="com.cognition.bit.system.domain.SysUserInfo">
         SELECT
             <include refid="userInfoColumns"/>
         FROM
@@ -36,7 +36,7 @@
     </select>
 
     <!--多条查询用户信息 -->
-    <select id="findList" resultType="com.cognition.bit.system.entity.SysUserInfo">
+    <select id="findList" resultType="com.cognition.bit.system.domain.SysUserInfo">
         SELECT
         <include refid="userInfoColumns"/>
         FROM sys_user_info a
@@ -68,7 +68,7 @@
     </select>
 
     <!-- 插入用户 -->
-    <insert id="insert" parameterType="com.cognition.bit.system.entity.SysUserInfo">
+    <insert id="insert" parameterType="com.cognition.bit.system.domain.SysUserInfo">
         INSERT INTO sys_user_info(
         `userinfo_id`,
         `user_id`,

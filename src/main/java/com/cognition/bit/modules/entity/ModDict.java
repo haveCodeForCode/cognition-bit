@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  * @email 1992lcg@163.com
  * @date 2017-09-29 18:28:07
  */
-public class ModDict extends BaseEntity<ModDict> implements Serializable {
+public class ModDict extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /*** 标签名*/

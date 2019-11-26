@@ -1,6 +1,6 @@
 package com.cognition.bit.system.service;
 
-import com.cognition.bit.system.entity.SysRole;
+import com.cognition.bit.system.domain.SysRole;
 
 import java.util.List;
 import java.util.Map;

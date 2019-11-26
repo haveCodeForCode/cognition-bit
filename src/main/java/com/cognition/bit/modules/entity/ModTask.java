@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @email 1992lcg@163.com
  * @date 2017-09-25 15:09:21
  */
-public class ModTask extends BaseEntity<ModTask> implements Serializable {
+public class ModTask extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
 

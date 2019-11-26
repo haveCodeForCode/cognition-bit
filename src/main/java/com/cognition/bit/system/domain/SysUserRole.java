@@ -1,4 +1,4 @@
-package com.cognition.bit.system.entity;
+package com.cognition.bit.system.domain;
 
 /**
  * 用户

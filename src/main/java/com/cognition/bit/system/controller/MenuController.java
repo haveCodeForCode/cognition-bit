@@ -1,6 +1,6 @@
 package com.cognition.bit.system.controller;
 
-import com.cognition.bit.system.entity.SysMenu;
+import com.cognition.bit.system.domain.SysMenu;
 import com.cognition.bit.system.service.MenuService;
 import com.cognition.bit.common.config.Constant;
 import com.cognition.bit.common.until.Query;

@@ -1,9 +1,9 @@
 package com.cognition.bit.system.controller;
 
 
-import com.cognition.bit.system.entity.SysDept;
-import com.cognition.bit.system.entity.SysRole;
-import com.cognition.bit.system.entity.SysUser;
+import com.cognition.bit.system.domain.SysDept;
+import com.cognition.bit.system.domain.SysRole;
+import com.cognition.bit.system.domain.SysUser;
 import com.cognition.bit.system.service.RoleService;
 import com.cognition.bit.system.service.UserService;
 import com.cognition.bit.common.until.PageUtils;

@@ -5,7 +5,7 @@
 
 
     <!--模糊查询手机与邮箱-->
-    <select id="getWihtLogininfo" resultType="com.cognition.bit.system.entity.SysUser">
+    <select id="getWihtLogininfo" resultType="com.cognition.bit.system.domain.SysUser">
         SELECT
           <include refid="userColumns"/>
         FROM
@@ -16,7 +16,7 @@
 
 
     <!--*********************************************************************-->
-    <select id="get" resultType="com.cognition.bit.system.entity.SysUser">
+    <select id="get" resultType="com.cognition.bit.system.domain.SysUser">
         SELECT
         <include refid="userColumns"/>
         FROM
@@ -25,7 +25,7 @@
         a.user_id = #{value}
     </select>
 
-    <select id="getByEntity" resultType="com.cognition.bit.system.entity.SysUser">
+    <select id="getByEntity" resultType="com.cognition.bit.system.domain.SysUser">
         SELECT
         <include refid="userColumns"/>
         FROM
@@ -68,7 +68,7 @@
         </where>
     </select>
 
-    <select id="findList" resultType="com.cognition.bit.system.entity.SysUser">
+    <select id="findList" resultType="com.cognition.bit.system.domain.SysUser">
         SELECT
         <include refid="userColumns"/>
         FROM sys_user a
@@ -164,7 +164,7 @@
         </where>
     </select>
 
-    <insert id="insert" parameterType="com.cognition.bit.system.entity.SysUser">
+    <insert id="insert" parameterType="com.cognition.bit.system.domain.SysUser">
         INSERT INTO sys_user
 		(
         `user_id`,
@@ -203,7 +203,7 @@
 		)
 	</insert>
 
-    <update id="update" parameterType="com.cognition.bit.system.entity.SysUser">
+    <update id="update" parameterType="com.cognition.bit.system.domain.SysUser">
         UPDATE sys_user
         <set>
             <if test="loginName != null and loginName !=''">

@@ -1,6 +1,6 @@
 package com.cognition.bit.system.vo;
 
-import com.cognition.bit.system.entity.*;
+import com.cognition.bit.system.domain.*;
 
 import java.io.Serializable;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.cognition.bit.system.entity;
+package com.cognition.bit.system.domain;
 
 import com.cognition.bit.system.persistence.BaseEntity;
 
@@ -9,7 +9,7 @@ import java.io.Serializable;
  *
  * @author LineInkBook
  */
-public class SysMenu extends BaseEntity<SysMenu> implements Serializable {
+public class SysMenu extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

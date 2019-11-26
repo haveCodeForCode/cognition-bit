@@ -2,7 +2,7 @@ package com.cognition.bit.system.persistence;
 
 
 import com.cognition.bit.system.config.shiro.ShiroUtils;
-import com.cognition.bit.system.entity.SysUser;
+import com.cognition.bit.system.domain.SysUser;
 import org.springframework.stereotype.Controller;
 
 /**

@@ -1,7 +1,7 @@
 package com.cognition.bit.system.controller;
 
 
-import com.cognition.bit.system.entity.SysUser;
+import com.cognition.bit.system.domain.SysUser;
 import com.cognition.bit.system.persistence.BaseController;
 import com.cognition.bit.system.service.MenuService;
 import com.cognition.bit.system.service.UserService;

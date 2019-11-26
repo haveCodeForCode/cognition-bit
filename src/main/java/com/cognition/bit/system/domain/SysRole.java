@@ -1,4 +1,4 @@
-package com.cognition.bit.system.entity;
+package com.cognition.bit.system.domain;
 
 import com.cognition.bit.system.persistence.BaseEntity;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * @author 王睿
  * @version 2018/12/28
  */
-public class SysRole extends BaseEntity<SysRole> implements Serializable{
+public class SysRole extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,19 +34,6 @@ public class SysRole extends BaseEntity<SysRole> implements Serializable{
      */
     private String permissions;
 
-    /**
-     * 数据范围
-     * <p>
-     * dataScope
-     */
-    private String dataScope;
-
-    /**
-     * 角色信息备注
-     * <p>
-     * remark
-     */
-    private String remark;
 //************临时变量***************
     /**
      * 角色菜单id列
@@ -80,22 +67,6 @@ public class SysRole extends BaseEntity<SysRole> implements Serializable{
         this.permissions = permissions;
     }
 
-    public String getDataScope() {
-        return dataScope;
-    }
-
-    public void setDataScope(String dataScope) {
-        this.dataScope = dataScope;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
     public List<Long> getMenuIds() {
         return menuIds;
     }
@@ -118,10 +89,6 @@ public class SysRole extends BaseEntity<SysRole> implements Serializable{
                 "name='" + name + '\'' +
                 ", cname='" + cname + '\'' +
                 ", permissions='" + permissions + '\'' +
-                ", dataScope='" + dataScope + '\'' +
-                ", remark='" + remark + '\'' +
-                ", menuIds=" + menuIds +
-                ", id=" + id +
                 ", createBy='" + createBy + '\'' +
                 ", updateBy='" + updateBy + '\'' +
                 ", createTime=" + createTime +

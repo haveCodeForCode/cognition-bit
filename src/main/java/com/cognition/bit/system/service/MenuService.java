@@ -1,6 +1,6 @@
 package com.cognition.bit.system.service;
 
-import com.cognition.bit.system.entity.SysMenu;
+import com.cognition.bit.system.domain.SysMenu;
 import com.cognition.bit.system.persistence.Tree;
 
 import java.util.List;

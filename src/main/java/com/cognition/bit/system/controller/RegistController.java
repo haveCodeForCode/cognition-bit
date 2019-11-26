@@ -1,7 +1,7 @@
 package com.cognition.bit.system.controller;
 
 import com.cognition.bit.common.until.*;
-import com.cognition.bit.system.entity.SysUser;
+import com.cognition.bit.system.domain.SysUser;
 import com.cognition.bit.system.service.UserService;
 import com.cognition.bit.common.config.Constant;
 import com.cognition.bit.system.persistence.BaseController;

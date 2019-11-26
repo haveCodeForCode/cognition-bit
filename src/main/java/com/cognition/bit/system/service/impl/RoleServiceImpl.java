@@ -1,8 +1,8 @@
 package com.cognition.bit.system.service.impl;
 
 
-import com.cognition.bit.system.entity.SysRole;
-import com.cognition.bit.system.entity.SysRoleMenu;
+import com.cognition.bit.system.domain.SysRole;
+import com.cognition.bit.system.domain.SysRoleMenu;
 import com.cognition.bit.system.service.RoleService;
 import com.cognition.bit.common.config.Constant;
 import com.cognition.bit.common.until.codegenerate.SnowFlake;

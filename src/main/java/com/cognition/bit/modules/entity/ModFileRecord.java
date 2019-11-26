@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @email 1992lcg@163.com
  * @date 2017-09-19 16:02:20
  */
-public class ModFileRecord extends BaseEntity<ModFileRecord> implements Serializable {
+public class ModFileRecord extends BaseEntity implements Serializable {
 
     /***文件名称*/
     private String fileName;

@@ -2,7 +2,7 @@ package com.cognition.bit.system.service.impl;
 
 
 import com.cognition.bit.system.dao.*;
-import com.cognition.bit.system.entity.*;
+import com.cognition.bit.system.domain.*;
 import com.cognition.bit.system.service.DeptService;
 import com.cognition.bit.system.service.UserService;
 import com.cognition.bit.common.config.Constant;

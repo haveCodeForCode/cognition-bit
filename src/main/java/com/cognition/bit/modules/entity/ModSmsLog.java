@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @email 1992lcg@163.com
  * @date 2019-06-15 15:54:43
  */
-public class ModSmsLog extends BaseEntity<ModSmsLog> implements Serializable {
+public class ModSmsLog extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 

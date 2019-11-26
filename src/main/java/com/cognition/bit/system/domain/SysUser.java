@@ -1,4 +1,4 @@
-package com.cognition.bit.system.entity;
+package com.cognition.bit.system.domain;
 
 import com.cognition.bit.system.persistence.BaseEntity;
 
@@ -7,7 +7,7 @@ import com.cognition.bit.system.persistence.BaseEntity;
  * @author LineInkBook
  * @version 2018/12/24
  */
-public class SysUser extends BaseEntity<SysUser> {
+public class SysUser extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 

@@ -1,6 +1,6 @@
 package com.cognition.bit.system.config.shiro;
 
-import com.cognition.bit.system.entity.SysUser;
+import com.cognition.bit.system.domain.SysUser;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;

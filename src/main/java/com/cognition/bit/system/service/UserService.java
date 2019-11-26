@@ -1,7 +1,7 @@
 package com.cognition.bit.system.service;
 
-import com.cognition.bit.system.entity.SysDept;
-import com.cognition.bit.system.entity.SysUser;
+import com.cognition.bit.system.domain.SysDept;
+import com.cognition.bit.system.domain.SysUser;
 import com.cognition.bit.system.persistence.Tree;
 import com.cognition.bit.system.vo.SysUserVo;
 
