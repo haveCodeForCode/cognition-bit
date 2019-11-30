@@ -10,11 +10,6 @@ import java.io.Serializable;
 public class SysRoleMenu implements Serializable {
 
     /**
-     * 关联主键
-     */
-    private Long id;
-
-    /**
      * 角色表主键
      */
     private Long roleId;
@@ -24,13 +19,6 @@ public class SysRoleMenu implements Serializable {
      */
     private Long menuId;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getRoleId() {
         return roleId;
@@ -50,10 +38,9 @@ public class SysRoleMenu implements Serializable {
 
     @Override
     public String toString() {
-        return "RoleMenu{" +
-                "id='" + id + '\'' +
-                ", roleId='" + roleId + '\'' +
-                ", menuId='" + menuId + '\'' +
+        return "SysRoleMenu{" +
+                "roleId=" + roleId +
+                ", menuId=" + menuId +
                 '}';
     }
 

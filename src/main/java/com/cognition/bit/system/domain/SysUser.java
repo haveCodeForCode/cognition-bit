@@ -2,6 +2,8 @@ package com.cognition.bit.system.domain;
 
 import com.cognition.bit.system.persistence.BaseEntity;
 
+import java.util.Date;
+
 /**
  * 用户Entity
  * @author LineInkBook
@@ -12,11 +14,11 @@ public class SysUser extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 登陆账号名
+     * 登陆账号
      * <p>
      * userName
      */
-    private String loginName;
+    private String userName;
 
     /**
      * 用户密码
@@ -45,6 +47,27 @@ public class SysUser extends BaseEntity {
      */
     private Long deptId;
 
+    /**
+     * 帐号状态（0正常 1停用）
+     * <p>
+     * status
+     */
+    private String status;
+
+    /**
+     * 最后登陆IP
+     * <p>
+     * loginIp
+     */
+    private String loginIp;
+
+    /**
+     * 最后登陆时间
+     * <p>
+     * loginDate
+     */
+    private Date loginDate;
+
     public SysUser(long id) {
         super(id);
     }
@@ -59,14 +82,6 @@ public class SysUser extends BaseEntity {
 
     public Long getDeptId() {
         return deptId;
-    }
-
-    public String getLoginName() {
-        return loginName;
-    }
-
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
     }
 
     public String getUserPassword() {
@@ -95,12 +110,15 @@ public class SysUser extends BaseEntity {
 
     @Override
     public String toString() {
-        return "User{" +
-                "loginName='" + loginName + '\'' +
+        return "SysUser{" +
+                "userName='" + userName + '\'' +
                 ", userPassword='" + userPassword + '\'' +
                 ", userEmail='" + userEmail + '\'' +
                 ", userMobile='" + userMobile + '\'' +
                 ", deptId=" + deptId +
+                ", status='" + status + '\'' +
+                ", loginIp='" + loginIp + '\'' +
+                ", loginDate=" + loginDate +
                 ", id=" + id +
                 ", createBy=" + createBy +
                 ", updateBy=" + updateBy +

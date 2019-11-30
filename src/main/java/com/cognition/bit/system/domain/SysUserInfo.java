@@ -1,13 +1,12 @@
 package com.cognition.bit.system.domain;
 
-import com.cognition.bit.system.persistence.BaseEntity;
 
 /**
  * 用户信息
  * @author LineInkBook
  * @version 2018/12/24
  */
-public class SysUserInfo extends BaseEntity{
+public class SysUserInfo {
 
     private static final long serialVersionUID = 1L;
 
@@ -19,18 +18,18 @@ public class SysUserInfo extends BaseEntity{
     private Long userId;
 
     /**
-     * 用户名
+     * 用户昵称
      * <p>
      * name
      */
-    private String userName;
+    private String nickName;
 
     /**
      * 图片ID
      * <p>
      * picId
      */
-    private String picUrl;
+    private String avatar;
 
     public Long getUserId() {
         return userId;
@@ -40,34 +39,28 @@ public class SysUserInfo extends BaseEntity{
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
-    public String getPicUrl() {
-        return picUrl;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     @Override
     public String toString() {
-        return "UserInfo{" +
+        return "SysUserInfo{" +
                 "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", picUrl='" + picUrl + '\'' +
-                ", id=" + id +
-                ", createBy='" + createBy + '\'' +
-                ", updateBy='" + updateBy + '\'' +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                ", delFlag='" + delFlag + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", avatar='" + avatar + '\'' +
                 '}';
     }
 }

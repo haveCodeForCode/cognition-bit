@@ -1,16 +1,10 @@
 package com.cognition.bit.system.domain;
 
 /**
- * 用户
+ * 用户角色关联表
  * @author taoya
  */
 public class SysUserRole {
-    /**
-     * 关联表主键
-     * <p>
-     * id
-     */
-    private Long id;
     /**
      * 用户主键
      * <p>
@@ -23,14 +17,6 @@ public class SysUserRole {
      *  roleId
      */
     private Long roleId;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getUserId() {
         return userId;
@@ -51,7 +37,6 @@ public class SysUserRole {
     @Override
     public String toString() {
         return "UserRoleDO{" +
-                "id=" + id +
                 ", userId=" + userId +
                 ", roleId=" + roleId +
                 '}';
