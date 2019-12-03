@@ -9,7 +9,7 @@ import com.cognition.bit.system.service.UserService;
 import com.cognition.bit.common.until.PageUtils;
 import com.cognition.bit.common.until.Query;
 import com.cognition.bit.common.until.ResultData;
-import com.cognition.bit.modules.service.DictService;
+import com.cognition.bit.framework.service.DictService;
 import com.cognition.bit.system.persistence.BaseController;
 import com.cognition.bit.system.persistence.Tree;
 import org.apache.ibatis.annotations.Param;

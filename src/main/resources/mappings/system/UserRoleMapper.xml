@@ -7,7 +7,7 @@
 
 	<select id="get" resultType="com.cognition.bit.system.domain.SysUserRole">
 		select
-		  `id`,`user_id`,`role_id`
+		  user_id`,`role_id`
 		from
 		  sys_user_role
 		where
@@ -115,11 +115,11 @@
 			user_id=#{userId}
 	</select>
 
-	<delete id="removeByUserId">
+	<delete id="removeByUserId" parameterType="long">
 		delete from sys_user_role where user_id=#{userId}
 	</delete>
 
-	<delete id="removeByRoleId">
+	<delete id="removeByRoleId" parameterType="long">
 		delete from sys_user_role where role_id=#{roleId}
 	</delete>
 

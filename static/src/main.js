@@ -8,6 +8,7 @@ import axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'font-awesome/css/font-awesome.min.css'
+import Cookies from 'js-cookie'
 
 Vue.prototype.$axios = axios;
 Vue.prototype.api = 'http://127.0.0.1:8090';
@@ -18,15 +19,6 @@ Vue.use(ElementUI);
 
 //异步请求前判断请求的连接是否需要token
 router.beforeEach((to, from, next) => {
-  // let token = localStorage.getItem('Authorization');
-  // console.log(token);
-  //   console.log(1);
-  //   console.log("我是浏览器本地缓存的token: "+token);
-  //   if (!token || token === 'null' || token === '') {
-  //     next('/login');
-  //   } else {
-  //     next('/home');
-  //   }
   let token = localStorage.getItem('Authorization');
   console.log("我是浏览器本地缓存的token: " + token);
   if (to.path === '/') {
@@ -74,6 +66,18 @@ axios.interceptors.response.use(
       }
     }
   });
+
+
+// 如果不想使用模拟服务器
+// 您想将MockJs用于mock api
+// 您可以执行：mockXHR（）
+// 目前MockJs将用于生产环境，
+//请在联机前将其删除！! !
+
+Vue.use(Element, {
+  // set element-ui default size
+  size: Cookies.get('size') || 'medium'
+});
 
 /* eslint-disable no-new */
 new Vue({

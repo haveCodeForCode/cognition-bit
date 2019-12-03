@@ -1,7 +1,7 @@
 package com.cognition.bit.common.until;
 
-import com.cognition.bit.modules.entity.ModScheduleJob;
-import com.cognition.bit.modules.entity.ModTask;
+import com.cognition.bit.framework.entity.ModScheduleJob;
+import com.cognition.bit.framework.entity.ModTask;
 
 /**
  * 定时任务工具类

@@ -1,16 +1,15 @@
 package com.cognition.bit.system.service.impl;
 
 
-import com.cognition.bit.system.dao.*;
-import com.cognition.bit.system.domain.*;
-import com.cognition.bit.system.service.DeptService;
-import com.cognition.bit.system.service.UserService;
 import com.cognition.bit.common.config.Constant;
 import com.cognition.bit.common.until.BuildTree;
 import com.cognition.bit.common.until.Query;
 import com.cognition.bit.common.until.StringUtils;
-import com.cognition.bit.common.until.codegenerate.SnowFlake;
+import com.cognition.bit.system.dao.*;
+import com.cognition.bit.system.domain.*;
 import com.cognition.bit.system.persistence.Tree;
+import com.cognition.bit.system.service.DeptService;
+import com.cognition.bit.system.service.UserService;
 import com.cognition.bit.system.vo.SysUserVo;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
@@ -198,7 +197,6 @@ public class UserServiceImpl implements UserService {
             List<SysUserRole> sysUserRoleList = new ArrayList<>();
             for (SysRole sysRole : sysRoles) {
                 SysUserRole sysUserRole = new SysUserRole();
-                sysUserRole.setId(SnowFlake.createSFid());
                 sysUserRole.setUserId(userId);
                 sysUserRole.setRoleId(sysRole.getId());
                 sysUserRoleList.add(sysUserRole);
@@ -212,8 +210,6 @@ public class UserServiceImpl implements UserService {
             if (sysUserVo.getSysUserInfo() == null) {
                 SysUserInfo sysUserInfo = new SysUserInfo();
                 sysUserInfo.setUserId(userId);
-                sysUserInfo.preInsert();
-                sysUserInfo.setUserName(sysUser.getLoginName());
                 userInfoDao.insert(sysUserInfo);
             }
         } catch (Exception e) {
@@ -271,7 +267,6 @@ public class UserServiceImpl implements UserService {
             Tree<SysDept> tree = new Tree<SysDept>();
             tree.setId(sysUser.getId().toString());
             tree.setParentId(sysUser.getDeptId().toString());
-            tree.setText(sysUser.getLoginName());
             Map<String, Object> state = new HashMap<>(16);
             state.put("opened", true);
             state.put("mType", "user");
