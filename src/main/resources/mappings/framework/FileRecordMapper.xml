@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cognition.bit.framework.dao.FileRecordDao">
+
+    <select id="get" resultType="com.cognition.bit.framework.entity.ModFileRecord">
+        select
+            <include refid="flieRecordColumns"/>
+        from
+            mod_file
+        where
+         file_id = #{value}
+    </select>
+
+    <select id="findList" resultType="com.cognition.bit.framework.entity.ModFileRecord">
+        select
+            <include refid="flieRecordColumns"/>
+        from mod_file
+        <where>
+            <if test="id != null and id != ''">
+                and file_id = #{id}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                `file_name` = #{fileName},
+            </if>
+            <if test="type != null and type != ''">
+                and `type` = #{type}
+            </if>
+            <if test="url != null and url != ''">
+                and url = #{url}
+            </if>
+            <if test="createDate != null and createDate != ''">
+                and create_date = #{createDate}
+            </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from mod_file
+        <where>
+            <if test="id != null and id != ''">
+                and file_id = #{id}
+            </if>
+            <if test="fileName != null and fileName != ''">
+                `file_name` = #{fileName},
+            </if>
+            <if test="type != null and type != ''">
+                and `type` = #{type}
+            </if>
+            <if test="url != null and url != ''">
+                and url = #{url}
+            </if>
+            <if test="createBy != null and createBy != ''">
+                and create_by = #{createBy}
+            </if>
+            <if test="createTime != null and createTime != ''">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateBy != null and updateBy != ''">
+                and update_by = #{updateBy}
+            </if>
+            <if test="updateTime != null and updateTime != ''">
+                and update_time = #{updateTime}
+            </if>
+            <if test="delFlag != null and delFlag != ''">
+                and del_flag = #{delFlag}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="com.cognition.bit.framework.entity.ModFileRecord">
+		insert into mod_file
+		(
+		    `file_id`,
+		    `file_name`,
+			`type`, 
+			`url`, 
+			`create_by`,
+			`create_time`,
+			`update_by`,
+			`update_time`,
+			`del_flag`
+		)
+		values
+		(
+		    #{id},
+		    #{fileName},
+			#{type}, 
+			#{url}, 
+			#{createBy},
+			#{createTime},
+			#{updateBy},
+			#{updateTime},
+			#{delFlag}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.cognition.bit.framework.entity.ModFileRecord">
+        update mod_file
+        <set>
+            <if test="fileName != null">
+                `file_name` = #{fileName},
+            </if>
+            <if test="type != null">
+                `type` = #{type},
+            </if>
+            <if test="url != null">
+                `url` = #{url},
+            </if>
+			<if test="url != null">
+                `create_by` = #{createBy},
+            </if>
+            <if test="createDate != null">
+                `create_date` = #{createDate}
+            </if>
+            <if test="updateBy != null">
+                `update_by` = #{updateBy}
+            </if>
+            <if test="updateTime != null">
+                `update_time` = #{updateTime}
+            </if>
+            <if test="delFlag != null">
+                `del_flag` = #{delFlag}
+            </if>
+        </set>
+        where file_id = #{id}
+    </update>
+
+    <delete id="remove">
+		delete from mod_file where file_id = #{value}
+	</delete>
+
+    <delete id="batchRemove">
+        delete from mod_file where file_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <sql id="flieRecordColumns">
+		`file_id` as `id`,
+		`file_name` as `fileName`,
+		`type`,
+		`url`,
+		`create_by` as createBy,
+		`create_time` as createTime,
+		`update_by` as updateBy,
+		`update_time` as updateTime,
+		`del_flag`
+	</sql>
+
+</mapper>
