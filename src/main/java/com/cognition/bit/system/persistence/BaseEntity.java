@@ -3,15 +3,15 @@
  */
 package com.cognition.bit.system.persistence;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.cognition.bit.common.config.Constant;
 import com.cognition.bit.common.until.codegenerate.SnowFlake;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Map;
 
 
 /**
@@ -19,17 +19,17 @@ import java.util.Map;
  * @author warry
  * @version 2014-05-16
  */
-public abstract class BaseEntity<T> implements Serializable {
+public abstract class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-
     /**
-     * 实体编号（唯一标识）
-     *
-     * @ id
+     * 实体类id（编号）
+     * <p>
+     * id
      */
     protected Long id;
+
     /**
      * 创建者
      * <p>
@@ -65,24 +65,39 @@ public abstract class BaseEntity<T> implements Serializable {
      */
     protected String delFlag;
 
+
     /**
+     * 备注
+     * <p>
+     * remark
+     */
+    private String remark;
+
+    /**
+     * 数据权限
+     * <p>
+     *  dataScope
+     */
+    private String dataScope;
+
+    /**
+     * 请求参数
      * 查询标记
      * <p>
-     * searchinfo
+     * params
      */
-    protected String searchInfo;
+    @JsonIgnore
+    private String params;
 
     /**
-     * 自定义SQL（SQL标识，SQL内容）
-     *
-     * @ sqlMap
+     * 搜索值
      */
-    protected Map<String, String> sqlMap;
-
-    public BaseEntity(long id) {
-    }
+    private String searchValue;
 
     public BaseEntity() {
+    }
+
+    public BaseEntity(long id) {
     }
 
     @JsonSerialize(using = ToStringSerializer.class)
@@ -133,14 +148,6 @@ public abstract class BaseEntity<T> implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public String getSearchInfo() {
-        return searchInfo;
-    }
-
-    public void setSearchInfo(String searchInfo) {
-        this.searchInfo = searchInfo;
-    }
-
     @Length(min = 1, max = 1)
     public String getDelFlag() {
         return delFlag;
@@ -150,24 +157,36 @@ public abstract class BaseEntity<T> implements Serializable {
         this.delFlag = delFlag;
     }
 
+    public String getRemark() {
+        return remark;
+    }
 
-//    /**
-//     * 是否是新记录（默认：false），调用setIsNewRecord()设置新记录，使用自定义ID。
-//     * 设置为true后强制执行插入语句，ID不会自动生成，需从手动传入。
-//     */
-//    protected boolean isNewRecord = false;
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
-//	@JsonIgnore
-//	@XmlTransient
-//	public Map<String, String> getSqlMap() {
-//		if (sqlMap == null){
-//			sqlMap = Maps.newHashMap();
-//		}
-//		return sqlMap;
-//	}
+    public String getDataScope() {
+        return dataScope;
+    }
 
-    public void setSqlMap(Map<String, String> sqlMap) {
-        this.sqlMap = sqlMap;
+    public void setDataScope(String dataScope) {
+        this.dataScope = dataScope;
+    }
+
+    public String getParams() {
+        return params;
+    }
+
+    public void setParams(String params) {
+        this.params = params;
+    }
+
+    public String getSearchValue() {
+        return searchValue;
+    }
+
+    public void setSearchValue(String searchValue) {
+        this.searchValue = searchValue;
     }
 
     /**

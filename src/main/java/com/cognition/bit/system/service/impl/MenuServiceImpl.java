@@ -1,7 +1,7 @@
 package com.cognition.bit.system.service.impl;
 
 
-import com.cognition.bit.system.entity.SysMenu;
+import com.cognition.bit.system.domain.SysMenu;
 import com.cognition.bit.system.service.MenuService;
 import com.cognition.bit.system.persistence.Tree;
 import com.cognition.bit.common.until.BuildTree;

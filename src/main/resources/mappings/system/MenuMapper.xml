@@ -3,7 +3,7 @@
 
 <mapper namespace="com.cognition.bit.system.dao.MenuDao">
 
-	<select id="listMenuByUserId" resultType="com.cognition.bit.system.entity.SysMenu">
+	<select id="listMenuByUserId" resultType="com.cognition.bit.system.domain.SysMenu">
 		select
 		  <include refid="menuColumns"/>
 		from sys_menu a
@@ -25,7 +25,7 @@
 
 	<!--**************************************************************************-->
 
-	<select id="get" resultType="com.cognition.bit.system.entity.SysMenu">
+	<select id="get" resultType="com.cognition.bit.system.domain.SysMenu">
 		SELECT
 		<include refid="menuColumns"/>
 		FROM
@@ -34,7 +34,7 @@
 		a.menu_id = #{value}
 	</select>
 
-	<select id="getByEntity" resultType="com.cognition.bit.system.entity.SysMenu">
+	<select id="getByEntity" resultType="com.cognition.bit.system.domain.SysMenu">
 		select
 		<include refid="menuColumns"/>
 		from sys_menu a
@@ -78,7 +78,7 @@
 		</where>
 	</select>
 
-	<select id="findList" resultType="com.cognition.bit.system.entity.SysMenu">
+	<select id="findList" resultType="com.cognition.bit.system.domain.SysMenu">
 		select
 		<include refid="menuColumns"/>
 		from sys_menu a
@@ -177,7 +177,7 @@
 		</where>
 	</select>
 
-	<insert id="insert" parameterType="com.cognition.bit.system.entity.SysMenu">
+	<insert id="insert" parameterType="com.cognition.bit.system.domain.SysMenu">
 		insert into sys_menu
 		(
 		`menu_id`,
@@ -212,7 +212,7 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="com.cognition.bit.system.entity.SysMenu">
+	<update id="update" parameterType="com.cognition.bit.system.domain.SysMenu">
 		update sys_menu
 		<set>
 			<if test="parentId != null and parentId !=''">

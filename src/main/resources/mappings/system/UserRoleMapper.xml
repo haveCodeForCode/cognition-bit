@@ -5,16 +5,16 @@
 
 	<!--*********************************************************************-->
 
-	<select id="get" resultType="com.cognition.bit.system.entity.SysUserRole">
+	<select id="get" resultType="com.cognition.bit.system.domain.SysUserRole">
 		select
-		  `id`,`user_id`,`role_id`
+		  user_id`,`role_id`
 		from
 		  sys_user_role
 		where
 		  id = #{value}
 	</select>
 
-	<select id="getByEntity" resultType="com.cognition.bit.system.entity.SysUserRole">
+	<select id="getByEntity" resultType="com.cognition.bit.system.domain.SysUserRole">
 		select
 		  `id`,`user_id`,`role_id`
 		from
@@ -32,7 +32,7 @@
 		</where>
 	</select>
 
-	<select id="findList" resultType="com.cognition.bit.system.entity.SysUserRole">
+	<select id="findList" resultType="com.cognition.bit.system.domain.SysUserRole">
 		select
 		  `id`,`user_id`,`role_id`
         from
@@ -70,7 +70,7 @@
 		</where>
 	</select>
 
-	<insert id="insert" parameterType="com.cognition.bit.system.entity.SysUserRole">
+	<insert id="insert" parameterType="com.cognition.bit.system.domain.SysUserRole">
 		insert into sys_user_role
 		(
 		`id`,
@@ -85,7 +85,7 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="com.cognition.bit.system.entity.SysUserRole">
+	<update id="update" parameterType="com.cognition.bit.system.domain.SysUserRole">
 		update sys_user_role
 		<set>
 			<if test="userId != null">`user_id` = #{userId}, </if>
@@ -115,11 +115,11 @@
 			user_id=#{userId}
 	</select>
 
-	<delete id="removeByUserId">
+	<delete id="removeByUserId" parameterType="long">
 		delete from sys_user_role where user_id=#{userId}
 	</delete>
 
-	<delete id="removeByRoleId">
+	<delete id="removeByRoleId" parameterType="long">
 		delete from sys_user_role where role_id=#{roleId}
 	</delete>
 

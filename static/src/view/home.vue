@@ -2,17 +2,17 @@
   <div class="index">
     <Header></Header>
     <LeftMenu></LeftMenu>
-    <div class="rightContainer" :class="{'content-collapse':collapse}">
-      <Tags/>
-      <div class="content">
-        <transition name="move" mode="out-in">
-          <keep-alive :include="tagsList">
-            <router-view></router-view>
-          </keep-alive>
-        </transition>
-      </div>
-    </div>
-  </div>
+<!--    <div class="rightContainer" :class="{'content-collapse':collapse}">-->
+<!--      <Tags/>-->
+<!--      <div class="content">-->
+<!--        <transition name="move" mode="out-in">-->
+<!--          <keep-alive :include="tagsList">-->
+<!--            <router-view></router-view>-->
+<!--          </keep-alive>-->
+<!--        </transition>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 </template>
 
 <script>

@@ -1,7 +1,7 @@
 package com.cognition.bit.system.controller;
 
 
-import com.cognition.bit.system.entity.SysUser;
+import com.cognition.bit.system.domain.SysUser;
 import com.cognition.bit.system.persistence.BaseController;
 import com.cognition.bit.system.service.MenuService;
 import com.cognition.bit.system.service.UserService;
@@ -34,6 +34,7 @@ public class LoginController extends BaseController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
     private UserService userService;
 
     private MenuService menuService;
@@ -62,10 +63,13 @@ public class LoginController extends BaseController {
     @PostMapping(value = "/login")
     @ResponseBody
     public ResultData login(@RequestParam(value = "loginInfo", required = false) String loginInfo,
-                            @RequestParam(value = "password", required = false) String password, String verify, HttpServletRequest request) {
+                            @RequestParam(value = "password", required = false) String password,
+                            String verify,
+                            String uuid,
+                            HttpServletRequest request) {
         try {
             //从session中获取随机数
-            String random = (String) request.getSession().getAttribute(RandomValidateCodeUtil.RANDOMCODEKEY);
+//            String random = (String) request.getSession().getAttribute(RandomValidateCodeUtil.RANDOMCODEKEY);
 //            if (StringUtils.isBlank(verify)) {
 //                return ResultData.result(false).setMsg("请输入验证码");
 //            }

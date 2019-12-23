@@ -1,13 +1,13 @@
 package com.cognition.bit.system.controller;
 
 import com.cognition.bit.common.until.*;
-import com.cognition.bit.system.entity.SysUser;
+import com.cognition.bit.system.domain.SysUser;
 import com.cognition.bit.system.service.UserService;
 import com.cognition.bit.common.config.Constant;
 import com.cognition.bit.system.persistence.BaseController;
 import com.cognition.bit.system.config.redis.RedisService;
 import com.cognition.bit.common.until.encrypt.Md5Utils;
-import com.cognition.bit.modules.service.SmsLogService;
+import com.cognition.bit.framework.service.SmsLogService;
 import com.cognition.bit.system.vo.SysUserVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,7 +88,7 @@ public class RegistController extends BaseController {
                 int hoursSeconds = Integer.parseInt(sdf.format(new Date()));
                 //默认用户名
                 String defaultUser = Tools.createNumCode("UR", hoursSeconds);
-                sysUser.setLoginName(defaultUser);
+                sysUser.setUserName(defaultUser);
                 //密码加密
                 String password = Md5Utils.encrypt(sysUser.getId().toString(), sysUserVo.getPassword());
                 sysUser.setUserPassword(password);
@@ -222,6 +222,4 @@ public class RegistController extends BaseController {
         }
     }
 
-
-//    public
 }

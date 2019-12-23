@@ -1,7 +1,7 @@
 package com.cognition.bit.system.controller;
 
 
-import com.cognition.bit.system.entity.SysDept;
+import com.cognition.bit.system.domain.SysDept;
 import com.cognition.bit.system.persistence.BaseController;
 import com.cognition.bit.system.service.DeptService;
 import com.cognition.bit.common.config.Constant;

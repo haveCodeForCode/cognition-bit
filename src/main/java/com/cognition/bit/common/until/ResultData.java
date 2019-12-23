@@ -82,7 +82,7 @@ public class ResultData {
         return success;
     }
 
-    public ResultData setSuccess(boolean success) {
+    private ResultData setSuccess(boolean success) {
         this.success = success;
         return this;
     }
@@ -91,7 +91,7 @@ public class ResultData {
         return code;
     }
 
-    public ResultData setCode(int code) {
+    private ResultData setCode(int code) {
         this.code = code;
         return this;
     }

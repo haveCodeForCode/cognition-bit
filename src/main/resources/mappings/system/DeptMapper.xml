@@ -13,7 +13,7 @@
 	</select>
 
 	<!--***********************************************************************-->
-	<select id="get" resultType="com.cognition.bit.system.entity.SysDept">
+	<select id="get" resultType="com.cognition.bit.system.domain.SysDept">
 		SELECT
 		<include refid="deptColumns"/>
 		FROM
@@ -21,7 +21,7 @@
 		WHERE a.dept_id = #{value}
 	</select>
 
-	<select id="getByEntity" resultType="com.cognition.bit.system.entity.SysDept">
+	<select id="getByEntity" resultType="com.cognition.bit.system.domain.SysDept">
 		SELECT
 		<include refid="deptColumns"/>
 		FROM
@@ -55,7 +55,7 @@
 		</where>
 	</select>
 
-	<select id="findList" resultType="com.cognition.bit.system.entity.SysDept">
+	<select id="findList" resultType="com.cognition.bit.system.domain.SysDept">
 		SELECT
 		<include refid="deptColumns"/>
 		FROM sys_dept a
@@ -130,7 +130,7 @@
 		</where>
 	</select>
 
-	<insert id="insert" parameterType="com.cognition.bit.system.entity.SysDept">
+	<insert id="insert" parameterType="com.cognition.bit.system.domain.SysDept">
 		insert into sys_dept
 		(
 			`dept_id`,
@@ -157,7 +157,7 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="com.cognition.bit.system.entity.SysDept">
+	<update id="update" parameterType="com.cognition.bit.system.domain.SysDept">
 		UPDATE sys_dept
 		<set>
 			<if test="parentId != null and parentId !=''">

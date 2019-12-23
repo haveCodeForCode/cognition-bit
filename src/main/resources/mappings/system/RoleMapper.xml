@@ -4,7 +4,7 @@
 
 <mapper namespace="com.cognition.bit.system.dao.RoleDao">
 
-	<select id="findWithUserId" resultType="com.cognition.bit.system.entity.SysRole">
+	<select id="findWithUserId" resultType="com.cognition.bit.system.domain.SysRole">
 		SELECT
 		<include refid="roleColumns"/>
 		FROM
@@ -18,7 +18,7 @@
 
 	<!--*********************************************************************-->
 
-	<select id="get" resultType="com.cognition.bit.system.entity.SysRole">
+	<select id="get" resultType="com.cognition.bit.system.domain.SysRole">
 		SELECT
 		<include refid="roleColumns"/>
 		FROM
@@ -26,7 +26,7 @@
 		WHERE a.role_id = #{value}
 	</select>
 
-	<select id="findList" resultType="com.cognition.bit.system.entity.SysRole">
+	<select id="findList" resultType="com.cognition.bit.system.domain.SysRole">
 		select
 		<include refid="roleColumns"/>
 		from sys_role a
@@ -111,7 +111,7 @@
 		</where>
 	</select>
 
-	<insert id="insert" parameterType="com.cognition.bit.system.entity.SysRole">
+	<insert id="insert" parameterType="com.cognition.bit.system.domain.SysRole">
 		insert into sys_role
 		(
 		`role_id`,
@@ -142,7 +142,7 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="com.cognition.bit.system.entity.SysRole">
+	<update id="update" parameterType="com.cognition.bit.system.domain.SysRole">
 		update sys_role
 		<set>
 			<if test="name != null">

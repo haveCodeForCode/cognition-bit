@@ -1,15 +1,14 @@
 package com.cognition.bit.system.service.impl;
 
 
-import com.cognition.bit.system.entity.SysRole;
-import com.cognition.bit.system.entity.SysRoleMenu;
-import com.cognition.bit.system.service.RoleService;
 import com.cognition.bit.common.config.Constant;
-import com.cognition.bit.common.until.codegenerate.SnowFlake;
 import com.cognition.bit.system.dao.RoleDao;
 import com.cognition.bit.system.dao.RoleMenuDao;
 import com.cognition.bit.system.dao.UserDao;
 import com.cognition.bit.system.dao.UserRoleDao;
+import com.cognition.bit.system.domain.SysRole;
+import com.cognition.bit.system.domain.SysRoleMenu;
+import com.cognition.bit.system.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -108,7 +107,6 @@ public class RoleServiceImpl implements RoleService {
             List<SysRoleMenu> rms = new ArrayList<>();
             for (Long menuId : menuIds) {
                 SysRoleMenu rmDo = new SysRoleMenu();
-                rmDo.setId(SnowFlake.createSFid());
                 rmDo.setRoleId(sysRole.getId());
                 rmDo.setMenuId(menuId);
                 rms.add(rmDo);
@@ -146,7 +144,6 @@ public class RoleServiceImpl implements RoleService {
         List<SysRoleMenu> sysRoleMenuList = new ArrayList<>();
         for (Long menuId : menuIds) {
             SysRoleMenu sysRoleMenu = new SysRoleMenu();
-            sysRoleMenu.setId(SnowFlake.createSFid());
             sysRoleMenu.setRoleId(roleId);
             sysRoleMenu.setMenuId(menuId);
             sysRoleMenuList.add(sysRoleMenu);

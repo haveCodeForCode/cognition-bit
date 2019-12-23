@@ -3,9 +3,26 @@
 
 <mapper namespace="com.cognition.bit.system.dao.UserDao">
 
+    <resultMap id="SysUserResult" type="com.cognition.bit.system.domain.SysUser">
+        <id property="id" column="user_id"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="userPassword" column="password"/>
+        <result property="userEmail" column="email"/>
+        <result property="userMobile" column="mobile"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="loginIp" column="login_ip"/>
+        <result property="loginDate" column="login_date"/>
+        <result property="status" column="status"/>
+        <result property="delFlag" column="del_flag"/>
+    </resultMap>
+
 
     <!--模糊查询手机与邮箱-->
-    <select id="getWihtLogininfo" resultType="com.cognition.bit.system.entity.SysUser">
+    <select id="getWihtLogininfo" parameterType="string" resultMap="SysUserResult">
         SELECT
           <include refid="userColumns"/>
         FROM
@@ -16,7 +33,7 @@
 
 
     <!--*********************************************************************-->
-    <select id="get" resultType="com.cognition.bit.system.entity.SysUser">
+    <select id="get" parameterType="string" resultMap="SysUserResult">
         SELECT
         <include refid="userColumns"/>
         FROM
@@ -25,7 +42,7 @@
         a.user_id = #{value}
     </select>
 
-    <select id="getByEntity" resultType="com.cognition.bit.system.entity.SysUser">
+    <select id="getByEntity" resultMap="SysUserResult">
         SELECT
         <include refid="userColumns"/>
         FROM
@@ -68,7 +85,7 @@
         </where>
     </select>
 
-    <select id="findList" resultType="com.cognition.bit.system.entity.SysUser">
+    <select id="findList" resultMap="SysUserResult">
         SELECT
         <include refid="userColumns"/>
         FROM sys_user a
@@ -164,7 +181,7 @@
         </where>
     </select>
 
-    <insert id="insert" parameterType="com.cognition.bit.system.entity.SysUser">
+    <insert id="insert" parameterType="com.cognition.bit.system.domain.SysUser">
         INSERT INTO sys_user
 		(
         `user_id`,
@@ -203,7 +220,7 @@
 		)
 	</insert>
 
-    <update id="update" parameterType="com.cognition.bit.system.entity.SysUser">
+    <update id="update" parameterType="com.cognition.bit.system.domain.SysUser">
         UPDATE sys_user
         <set>
             <if test="loginName != null and loginName !=''">
@@ -258,10 +275,14 @@
           a.email       AS "userEmail",
           a.mobile      AS "userMobile",
           a.dept_id     AS "deptId",
+          a.login_ip    AS "loginIp",
+          a.login_date  AS "loginDate",
+          a.status      AS "status",
           a.create_by	AS "createBy",
 		  a.create_time AS "createTime",
 		  a.update_by	AS "updateBy",
 		  a.update_time AS "updateTime",
 		  a.del_flag 	AS "delFlag"
     </sql>
+
 </mapper>

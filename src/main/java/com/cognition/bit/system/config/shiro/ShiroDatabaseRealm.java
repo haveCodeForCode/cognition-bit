@@ -6,7 +6,7 @@ import com.cognition.bit.system.config.ApplicationContextRegister;
 import com.cognition.bit.system.config.jwt.JwtToken;
 import com.cognition.bit.system.config.jwt.JwtUtil;
 import com.cognition.bit.system.dao.UserDao;
-import com.cognition.bit.system.entity.SysUser;
+import com.cognition.bit.system.domain.SysUser;
 import com.cognition.bit.system.service.MenuService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

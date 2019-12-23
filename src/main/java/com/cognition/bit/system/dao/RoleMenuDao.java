@@ -1,6 +1,6 @@
 package com.cognition.bit.system.dao;
 
-import com.cognition.bit.system.entity.SysRoleMenu;
+import com.cognition.bit.system.domain.SysRoleMenu;
 import com.cognition.bit.system.persistence.BaseDao;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;

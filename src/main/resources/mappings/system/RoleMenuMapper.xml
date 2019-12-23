@@ -30,7 +30,7 @@
 	</insert>
 
 	<!--*********************************************************************-->
-	<select id="get" resultType="com.cognition.bit.system.entity.SysRoleMenu">
+	<select id="get" resultType="com.cognition.bit.system.domain.SysRoleMenu">
 		SELECT
 			`role_menu_id`,`role_id`,`menu_id`
 		FROM
@@ -56,7 +56,7 @@
 		</where>
 	</select>
 
-	<select id="findList" resultType="com.cognition.bit.system.entity.SysRoleMenu">
+	<select id="findList" resultType="com.cognition.bit.system.domain.SysRoleMenu">
 		select
 		`role_menu_id`,`role_id`,`menu_id`
 		FROM
@@ -94,7 +94,7 @@
 		</where>
 	</select>
 
-	<insert id="insert" parameterType="com.cognition.bit.system.entity.SysRoleMenu">
+	<insert id="insert" parameterType="com.cognition.bit.system.domain.SysRoleMenu">
 		insert into sys_role_menu
 		(
 		`role_menu_id`,
@@ -109,7 +109,7 @@
 		)
 	</insert>
 
-	<update id="update" parameterType="com.cognition.bit.system.entity.SysRoleMenu">
+	<update id="update" parameterType="com.cognition.bit.system.domain.SysRoleMenu">
 		update sys_role_menu
 		<set>
 			<if test="roleId != null">

@@ -1,6 +1,6 @@
 package com.cognition.bit.system.controller;
 
-import com.cognition.bit.system.entity.SysRole;
+import com.cognition.bit.system.domain.SysRole;
 import com.cognition.bit.system.service.RoleService;
 import com.cognition.bit.common.until.ResultData;
 import com.cognition.bit.system.persistence.BaseController;
