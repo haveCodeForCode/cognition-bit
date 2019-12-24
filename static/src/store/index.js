@@ -1,36 +1,25 @@
-//******store vuex 全局状态变量管理******
+import Vue from 'vue'
+import Vuex from 'vuex'
+import getters from './getters'
 
-//引入vue
-import Vue from 'vue';
-import Vuex from 'vuex';
+Vue.use(Vuex)
 
-//引用模块
-import app from './modules/app'
-import user from './modules/user'
+// https://webpack.js.org/guides/dependency-management/#requirecontext
+const modulesFiles = require.context('./modules', true, /\.js$/)
 
-//应用vuex
-Vue.use(Vuex);
+// you do not need `import app from './modules/app'`
+// it will auto require all vuex module from modules file
+const modules = modulesFiles.keys().reduce((modules, modulePath) => {
+  // set './app.js' => 'app'
+  const moduleName = modulePath.replace(/^\.\/(.*)\.\w+$/, '$1')
+  const value = modulesFiles(modulePath)
+  modules[moduleName] = value.default
+  return modules
+}, {})
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
+  modules,
+  getters
+})
 
-  modules: {
-    //系统
-    app,
-    //用户
-    user
-  }
-
-  //******模板***
-  // state: {
-  // ***声明存放值**
-  //   user:xxx,
-  //   Menu:xxx
-  // },
-  // mutations: {
-  //  **全局同步函数
-  //   // 修改token，并将token存入localStorage
-  //  [setState](state, value) {
-  // 　　　　　　state.xxx = value
-  // 　}
-  // }
-});
+export default store
