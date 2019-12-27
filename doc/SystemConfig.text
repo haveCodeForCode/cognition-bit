@@ -100,7 +100,6 @@ public class SystemConfig {
      *
      * @return
      */
-    @Bean("rediscacheManager")
     RedisCacheManager rediscacheManager() {
         //初始化redis缓存对象
         RedisCacheManager redisCacheManager = new RedisCacheManager();

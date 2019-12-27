@@ -14,6 +14,7 @@ import com.cognition.bit.system.vo.SysUserVo;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -106,13 +107,14 @@ public class UserServiceImpl implements UserService {
         //查找存放用户
         Map<String, Object> userQuery = Query.withDelFlag();
         userQuery.put("id", userId);
+        sysUserVo.setUserId(userId);
         SysUser sysUser = userDao.getByEntity(userQuery);
-        sysUserVo.setSysUser(sysUser);
+        BeanUtils.copyProperties(sysUser,sysUserVo);
         //用户信息
         Map<String, Object> query = Query.withDelFlag();
         query.put("userId", userId);
         SysUserInfo sysUserInfo = userInfoDao.getByEntity(query);
-        sysUserVo.setSysUserInfo(sysUserInfo);
+        BeanUtils.copyProperties(sysUserInfo,sysUserVo);
         //用户角色
         List<SysRole> sysRoles = roleDao.findWithUserId(query);
         sysUserVo.setSysRoles(sysRoles);
@@ -207,7 +209,7 @@ public class UserServiceImpl implements UserService {
             }
 
             //放入用户角色信息
-            if (sysUserVo.getSysUserInfo() == null) {
+            if (StringUtils.isNotEmpty(sysUserVo.getNickName())) {
                 SysUserInfo sysUserInfo = new SysUserInfo();
                 sysUserInfo.setUserId(userId);
                 userInfoDao.insert(sysUserInfo);

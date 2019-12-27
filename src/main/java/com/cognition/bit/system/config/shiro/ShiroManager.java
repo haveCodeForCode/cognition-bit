@@ -1,7 +1,6 @@
 package com.cognition.bit.system.config.shiro;
 
 //slf4j日志
-
 import com.cognition.bit.system.domain.SysUser;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -10,8 +9,6 @@ import org.slf4j.LoggerFactory;
 
 
 //设置注解
-
-
 /**
  * Shiro 操作（工具）类
  *

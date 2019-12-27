@@ -1,208 +1,184 @@
 package com.cognition.bit.system.config.redis;
 
-
-import com.cognition.bit.common.until.SerializeUtil;
-import org.apache.shiro.cache.Cache;
-import org.apache.shiro.cache.CacheException;
-import org.apache.shiro.util.CollectionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.*;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
-
+import java.util.concurrent.TimeUnit;
 
 /**
- * 通过redis方法实现(重写)Cache缓存方法同时加密
- *  RedisManager(redis底层实现）->RedisCache(redis缓存实现）
- * @author worry
- */
-public class RedisCache<K, V> implements Cache<K, V> {
+ * spring redis 工具类
+ *
+ * @author ruoyi
+ **/
+@SuppressWarnings(value = {"unchecked", "rawtypes"})
+@Component
+public class RedisCache {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    public RedisTemplate redisTemplate;
 
-    /**
-     * 初始化redisManager实例
-     */
-    private RedisManager cache;
-
-    /**
-     * redis的会话密钥
-     */
-    private String keyPrefix = "shiroSession_redisCache:";
-
-    /**
-     * 通过一个JedisManager实例构造RedisCache
-     * @param cache 缓存管理器实例
-     */
-    private RedisCache(RedisManager cache) {
-        if (cache == null) {
-            throw new IllegalArgumentException("Cache argument cannot be null.");
-        }
-        this.cache = cache;
+    @Autowired
+    public void setRedisTemplate(RedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
     }
 
     /**
-     * 使用指定的Redis管理器加上密钥前缀。
+     * 缓存基本的对象，Integer、String、实体类等
      *
-     * @param cache  缓存管理器实例
-     * @param prefix 获取redis密钥前缀
+     * @param key 缓存的键值
+     * @param value 缓存的值
+     * @return 缓存的对象
      */
-    public RedisCache(RedisManager cache, String prefix) {
-        //获取当前缓存对象为this
-        this(cache);
-        // set the prefix
-        this.keyPrefix = prefix;
+    public <T> ValueOperations<String, T> setCacheObject(String key, T value) {
+        ValueOperations<String, T> operation = redisTemplate.opsForValue();
+        operation.set(key, value);
+        return operation;
     }
 
     /**
-     * key获取cache中对象（重写cache获取方法）
+     * 缓存基本的对象，Integer、String、实体类等
      *
-     * @param key               所获取对象的key值
-     * @return value            redis中key所对应的对象
-     * @throws CacheException   抛出异常
+     * @param key 缓存的键值
+     * @param value 缓存的值
+     * @param timeout 时间
+     * @param timeUnit 时间颗粒度
+     * @return 缓存的对象
      */
-    @Override
-    public V get(K key) throws CacheException {
-        logger.debug("根据key从Redis中获取对象 key [" + key + "]");
-        try {
-            if (key == null) {
-                return null;
-            } else {
-                byte[] rawValue = cache.redisGet(getByteKey(key));
-                //反序列化
-                @SuppressWarnings("unchecked")
-                V value = (V) SerializeUtil.deserialize(rawValue);
-                return value;
+    public <T> ValueOperations<String, T> setCacheObject(String key, T value, Integer timeout, TimeUnit timeUnit) {
+        ValueOperations<String, T> operation = redisTemplate.opsForValue();
+        operation.set(key, value, timeout, timeUnit);
+        return operation;
+    }
+
+    /**
+     * 获得缓存的基本对象。
+     *
+     * @param key 缓存键值
+     * @return 缓存键值对应的数据
+     */
+    public <T> T getCacheObject(String key) {
+        ValueOperations<String, T> operation = redisTemplate.opsForValue();
+        return operation.get(key);
+    }
+
+    /**
+     * 删除单个对象
+     *
+     * @param key
+     */
+    public void deleteObject(String key) {
+        redisTemplate.delete(key);
+    }
+
+    /**
+     * 删除集合对象
+     *
+     * @param collection
+     */
+    public void deleteObject(Collection collection) {
+        redisTemplate.delete(collection);
+    }
+
+    /**
+     * 缓存List数据
+     *
+     * @param key 缓存的键值
+     * @param dataList 待缓存的List数据
+     * @return 缓存的对象
+     */
+    public <T> ListOperations<String, T> setCacheList(String key, List<T> dataList) {
+        ListOperations listOperation = redisTemplate.opsForList();
+        if (null != dataList) {
+            int size = dataList.size();
+            for (int i = 0; i < size; i++) {
+                listOperation.leftPush(key, dataList.get(i));
             }
-        } catch (Throwable t) {
-            throw new CacheException(t);
         }
+        return listOperation;
     }
 
     /**
-     *  key值存入（重写cache存入方法）
+     * 获得缓存的list对象
      *
-     * @param key     存入对象的key值
-     * @param value   存入对象的value值
-     * @return        返回变量
-     * @throws CacheException 抛出异常
+     * @param key 缓存的键值
+     * @return 缓存键值对应的数据
      */
-    @Override
-    public V put(K key, V value) throws CacheException {
-        logger.debug("根据key从存储 key [" + key + "]");
-        try {
-            cache.redisSet(getByteKey(key), SerializeUtil.serialize(value));
-            return value;
-        } catch (Throwable t) {
-            throw new CacheException(t);
+    public <T> List<T> getCacheList(String key) {
+        List<T> dataList = new ArrayList<T>();
+        ListOperations<String, T> listOperation = redisTemplate.opsForList();
+        Long size = listOperation.size(key);
+
+        for (int i = 0; i < size; i++) {
+            dataList.add(listOperation.index(key, i));
         }
+        return dataList;
     }
 
     /**
-     * key值删除（重写cache删除方法）
+     * 缓存Set
      *
-     * @param key  键值
-     * @throws CacheException 抛出异常
+     * @param key 缓存键值
+     * @param dataSet 缓存的数据
+     * @return 缓存数据的对象
      */
-    @Override
-    public V remove(K key) throws CacheException {
-        logger.debug("从redis中删除 key [" + key + "]");
-        try {
-            V previous = get(key);
-            cache.redisDel(getByteKey(key));
-            return previous;
-        } catch (Throwable t) {
-            throw new CacheException(t);
+    public <T> BoundSetOperations<String, T> setCacheSet(String key, Set<T> dataSet) {
+        BoundSetOperations<String, T> setOperation = redisTemplate.boundSetOps(key);
+        Iterator<T> it = dataSet.iterator();
+        while (it.hasNext()) {
+            setOperation.add(it.next());
         }
+        return setOperation;
     }
 
     /**
-     * 清空redis缓存（重写cache删除方法）
-     */
-    @Override
-    public void clear() throws CacheException {
-        logger.debug("从redis中删除所有元素");
-        try {
-            cache.redisFlushDB();
-        } catch (Throwable t) {
-            throw new CacheException(t);
-        }
-    }
-
-    /**
-     * 测试缓存大小
-     * redisDbSize
-     * @return
-     */
-    @Override
-    public int size() {
-        try {
-            Long longSize = cache.redisDbSize();
-            return longSize.intValue();
-        } catch (Throwable t) {
-            throw new CacheException(t);
-        }
-    }
-
-    /**
-     * 钥匙存入缓存
-     *
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public Set<K> keys() {
-        try {
-            Set<byte[]> keys = cache.redisKeys(this.keyPrefix + "*");
-            if (CollectionUtils.isEmpty(keys)) {
-                return Collections.emptySet();
-            } else {
-                Set<K> newKeys = new HashSet<K>();
-                for (byte[] key : keys) {
-                    newKeys.add((K) key);
-                }
-                return newKeys;
-            }
-        } catch (Throwable t) {
-            throw new CacheException(t);
-        }
-    }
-
-    /**
-     * 给想获得byte[]型的key加上密匙
+     * 获得缓存的set
      *
      * @param key
      * @return
      */
-    private byte[] getByteKey(K key) {
-        if (key instanceof String) {
-            String preKey = this.keyPrefix + key;
-            return preKey.getBytes();
-        } else {
-            return SerializeUtil.serialize(key);
-        }
+    public <T> Set<T> getCacheSet(String key) {
+        Set<T> dataSet = new HashSet<T>();
+        BoundSetOperations<String, T> operation = redisTemplate.boundSetOps(key);
+        dataSet = operation.members();
+        return dataSet;
     }
 
-    @Override
-    public Collection<V> values() {
-        try {
-            Set<byte[]> keys = cache.redisKeys(this.keyPrefix + "*");
-            if (!CollectionUtils.isEmpty(keys)) {
-                List<V> values = new ArrayList<V>(keys.size());
-                for (byte[] key : keys) {
-                    @SuppressWarnings("unchecked")
-                    V value = get((K) key);
-                    if (value != null) {
-                        values.add(value);
-                    }
-                }
-                return Collections.unmodifiableList(values);
-            } else {
-                return Collections.emptyList();
+    /**
+     * 缓存Map
+     *
+     * @param key
+     * @param dataMap
+     * @return
+     */
+    public <T> HashOperations<String, String, T> setCacheMap(String key, Map<String, T> dataMap) {
+        HashOperations hashOperations = redisTemplate.opsForHash();
+        if (null != dataMap) {
+            for (Map.Entry<String, T> entry : dataMap.entrySet()) {
+                hashOperations.put(key, entry.getKey(), entry.getValue());
             }
-        } catch (Throwable t) {
-            throw new CacheException(t);
         }
+        return hashOperations;
     }
 
+    /**
+     * 获得缓存的Map
+     *
+     * @param key
+     * @return
+     */
+    public <T> Map<String, T> getCacheMap(String key) {
+        Map<String, T> map = redisTemplate.opsForHash().entries(key);
+        return map;
+    }
+
+    /**
+     * 获得缓存的基本对象列表
+     *
+     * @param pattern 字符串前缀
+     * @return 对象列表
+     */
+    public Collection<String> keys(String pattern) {
+        return redisTemplate.keys(pattern);
+    }
 }

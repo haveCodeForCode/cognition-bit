@@ -1,12 +1,11 @@
 package com.cognition.bit.system.config.redis;
 
-import com.cognition.bit.common.config.Constant;
 import com.cognition.bit.common.until.SerializeUtil;
 import com.cognition.bit.common.until.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Worry
@@ -15,11 +14,11 @@ import java.util.Objects;
 @Service
 public class RedisService {
 
-    private RedisManager redisManager;
+    private RedisCache redisCache;
 
     @Autowired
-    public void setRedisManager(RedisManager redisManager) {
-        this.redisManager = redisManager;
+    public void setRedisCache(RedisCache redisCache) {
+        this.redisCache = redisCache;
     }
 
     /**
@@ -29,10 +28,9 @@ public class RedisService {
      * @return
      */
     public String redisGet(String key) {
-        byte[] keyByte = SerializeUtil.serialize(key);
-        keyByte = redisManager.redisGet(keyByte);
-        if (keyByte!=null && keyByte.length > Constant.INT_ZERO) {
-            return Objects.requireNonNull(SerializeUtil.deserialize(keyByte)).toString();
+        String captcha = redisCache.getCacheObject(key);
+        if (StringUtils.isNotEmpty(captcha)) {
+            return captcha;
         } else {
             return null;
         }
@@ -47,22 +45,9 @@ public class RedisService {
      * @return
      */
     public String redisSet(String key, String value, int expire) {
-        //键值转byte
-        byte[] keyByte = SerializeUtil.serialize(key);
-        //变量转byte
-        byte[] valueByte = SerializeUtil.serialize(value);
         //回传值
-        String backValue;
-        if (expire > Constant.INT_ZERO) {
-            backValue = redisManager.redisSet(keyByte, valueByte, expire);
-        } else {
-            backValue = redisManager.redisSet(keyByte, valueByte);
-        }
-        if (StringUtils.isNotEmpty(backValue)) {
-            return backValue;
-        } else {
-            return null;
-        }
+        redisCache.setCacheObject(key, value, expire, TimeUnit.MINUTES);
+        return null;
     }
 
     /**
@@ -71,7 +56,6 @@ public class RedisService {
      * @param key
      */
     public void redisDel(String key) {
-        byte[] keyByte = SerializeUtil.serialize(key);
-        redisManager.redisDel(keyByte);
+        redisCache.deleteObject(key);
     }
 }

@@ -1,13 +1,13 @@
 package com.cognition.bit.system.controller;
 
-import com.cognition.bit.common.until.*;
-import com.cognition.bit.system.domain.SysUser;
-import com.cognition.bit.system.service.UserService;
 import com.cognition.bit.common.config.Constant;
-import com.cognition.bit.system.persistence.BaseController;
-import com.cognition.bit.system.config.redis.RedisService;
+import com.cognition.bit.common.until.*;
 import com.cognition.bit.common.until.encrypt.Md5Utils;
 import com.cognition.bit.framework.service.SmsLogService;
+import com.cognition.bit.system.config.redis.RedisService;
+import com.cognition.bit.system.domain.SysUser;
+import com.cognition.bit.system.persistence.BaseController;
+import com.cognition.bit.system.service.UserService;
 import com.cognition.bit.system.vo.SysUserVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,18 +67,21 @@ public class RegistController extends BaseController {
             SysUser sysUser = new SysUser();
             //验证用户是否已存在
             String loginInfo = null;
-            if (StringUtils.isNotEmpty(sysUserVo.getMobile())) {
-                loginInfo = sysUserVo.getMobile();
+
+            if (StringUtils.isNotEmpty(sysUserVo.getUserMobile())) {
+                loginInfo = sysUserVo.getUserMobile();
                 //存入手机
-                sysUser.setUserMobile(sysUserVo.getMobile());
-            } else if (StringUtils.isNotEmpty(sysUserVo.getEmail())) {
-                loginInfo = sysUserVo.getEmail();
-                sysUser.setUserEmail(sysUserVo.getEmail());
+                sysUser.setUserMobile(loginInfo);
+            } else if (StringUtils.isNotEmpty(sysUserVo.getUserEmail())) {
+                loginInfo = sysUserVo.getUserEmail();
+                sysUser.setUserEmail(loginInfo);
+            } else {
+                return ResultData.result(false).setMsg("注册失败,未获取到用户信息！");
             }
             //存在用户
-            SysUser userold = userService.getWihtLogininfo(loginInfo);
+            SysUser userOld = userService.getWihtLogininfo(loginInfo);
 
-            if (userold != null) {
+            if (userOld != null) {
                 return ResultData.result(false).setMsg("用户已存在");
             } else {
                 //插入很用户
@@ -90,15 +93,15 @@ public class RegistController extends BaseController {
                 String defaultUser = Tools.createNumCode("UR", hoursSeconds);
                 sysUser.setUserName(defaultUser);
                 //密码加密
-                String password = Md5Utils.encrypt(sysUser.getId().toString(), sysUserVo.getPassword());
+                String password = Md5Utils.encrypt(sysUser.getId().toString(), sysUserVo.getUserPassword());
                 sysUser.setUserPassword(password);
                 userService.save(sysUser);
                 //删除用户随机验证码
                 String randomKey = null;
-                if (StringUtils.isNotEmpty(sysUserVo.getMobile())) {
-                    randomKey = sysUserVo.getMobile() + "random";
-                } else if (StringUtils.isNotEmpty(sysUserVo.getEmail())) {
-                    randomKey = sysUserVo.getEmail() + "random";
+                if (StringUtils.isNotEmpty(sysUserVo.getUserMobile())) {
+                    randomKey = loginInfo + "random";
+                } else if (StringUtils.isNotEmpty(sysUserVo.getUserEmail())) {
+                    randomKey = loginInfo + "random";
                 }
                 redisService.redisDel(randomKey);
                 return ResultData.result(true).setMsg("注册成功");

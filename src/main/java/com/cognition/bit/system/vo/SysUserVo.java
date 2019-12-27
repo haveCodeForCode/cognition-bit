@@ -13,23 +13,73 @@ import java.util.List;
  */
 public class SysUserVo implements Serializable {
 
+
+    private Long userId;
     /**
-     * 用户账户信息
-     */
-    private SysUser sysUser;
-    /**
-     * 用户基本信息
+     * 登陆账号
      * <p>
-     * userInfo
+     * userName
      */
-    private SysUserInfo sysUserInfo;
+    private String userName;
 
     /**
-     * 部门信息
+     * 用户密码
+     * <p>
+     * userPassword
+     */
+    private String userPassword;
+
+    /**
+     * 用户邮箱
+     * <p>
+     * userEmail
+     */
+    private String userEmail;
+
+    /**
+     * 手机号
+     * <p>
+     */
+    private String userMobile;
+
+    /**
+     * 部门
      * <p>
      * dept
      */
-    private SysDept sysDept;
+    private Long deptId;
+
+    /**
+     * 帐号状态（0正常 1停用）
+     * <p>
+     * status
+     */
+    private String status;
+
+    /**
+     * 用户昵称
+     * <p>
+     * name
+     */
+    private String nickName;
+
+    /**
+     * 图片ID
+     * <p>
+     * picId
+     */
+    private String avatar;
+
+    /**
+     * 上级部门ID，一级部门为0
+     */
+    private Long parentId;
+
+    /**
+     * 部门名称
+     */
+    private String name;
+
 
     /**
      * 用户角色对象
@@ -43,51 +93,92 @@ public class SysUserVo implements Serializable {
      */
     private List<SysMenu> sysMenus;
 
-    /**
-     * 用户相关登陆信息
-     */
-    private String mobile;
-
-    /**
-     * 登陆密码
-     */
-    private String password;
-
-    /**
-     * 邮箱
-     */
-    private String email;
-
-    public SysUser getSysUser() {
-        return sysUser;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setSysUser(SysUser sysUser) {
-        this.sysUser = sysUser;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public List<SysMenu> getSysMenus() {
-        return sysMenus;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setSysMenus(List<SysMenu> sysMenus) {
-        this.sysMenus = sysMenus;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public SysUserInfo getSysUserInfo() {
-        return sysUserInfo;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public void setSysUserInfo(SysUserInfo sysUserInfo) {
-        this.sysUserInfo = sysUserInfo;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
-    public SysDept getSysDept() {
-        return sysDept;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setSysDept(SysDept sysDept) {
-        this.sysDept = sysDept;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserMobile() {
+        return userMobile;
+    }
+
+    public void setUserMobile(String userMobile) {
+        this.userMobile = userMobile;
+    }
+
+    public Long getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Long deptId) {
+        this.deptId = deptId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<SysRole> getSysRoles() {
@@ -98,41 +189,30 @@ public class SysUserVo implements Serializable {
         this.sysRoles = sysRoles;
     }
 
-    public String getMobile() {
-        return mobile;
+    public List<SysMenu> getSysMenus() {
+        return sysMenus;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setSysMenus(List<SysMenu> sysMenus) {
+        this.sysMenus = sysMenus;
     }
 
     @Override
     public String toString() {
-        return "UserVo{" +
-                "user=" + sysUser +
-                ", userInfo=" + sysUserInfo +
-                ", dept=" + sysDept +
-                ", roles=" + sysRoles +
-                ", menus=" + sysMenus +
-                ", mobile='" + mobile + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
+        return "SysUserVo{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userPassword='" + userPassword + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userMobile='" + userMobile + '\'' +
+                ", deptId=" + deptId +
+                ", status='" + status + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", parentId=" + parentId +
+                ", name='" + name + '\'' +
+                ", sysRoles=" + sysRoles +
+                ", sysMenus=" + sysMenus +
                 '}';
     }
 }

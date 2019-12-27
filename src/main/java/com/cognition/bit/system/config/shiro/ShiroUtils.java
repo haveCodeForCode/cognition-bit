@@ -15,10 +15,16 @@ import java.util.List;
  * @author taoya
  */
 public class ShiroUtils {
-    @Autowired
+
+
     private static SessionDAO sessionDAO;
 
-    public static Subject getSubjct() {
+    @Autowired
+    public static void setSessionDAO(SessionDAO sessionDAO) {
+        ShiroUtils.sessionDAO = sessionDAO;
+    }
+
+    private static Subject getSubjct() {
         return SecurityUtils.getSubject();
     }
 
