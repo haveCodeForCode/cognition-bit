@@ -10,7 +10,8 @@ import javax.servlet.ServletResponse;
 import java.io.Serializable;
 
 /**
- * 自定义sessionId获取
+ *
+ * （关闭了）自定义sessionId获取
  *
  * @author Worry
  * @version 2019/12/24

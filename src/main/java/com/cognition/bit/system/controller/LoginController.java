@@ -2,12 +2,13 @@ package com.cognition.bit.system.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.cognition.bit.common.until.AjaxResult;
 import com.cognition.bit.common.until.RandomValidateCodeUtil;
-import com.cognition.bit.common.until.ResultData;
 import com.cognition.bit.common.until.encrypt.Md5Utils;
 import com.cognition.bit.system.domain.SysUser;
 import com.cognition.bit.system.persistence.BaseController;
 import com.cognition.bit.system.service.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.Map;
 
 //import com.cognition.bit.system.config.jwt.JwtUtil;
@@ -53,7 +55,7 @@ public class LoginController extends BaseController {
      */
     @PostMapping(value = "/login")
     @ResponseBody
-    public String login(@RequestBody Map<String, String> params) {
+    public AjaxResult login(@RequestBody Map<String, String> params) {
         JSONObject jsonObect = new JSONObject();
         try {
             //从session中获取随机数
@@ -66,7 +68,7 @@ public class LoginController extends BaseController {
 //            }
         } catch (Exception e) {
             logger.error("验证码校验失败", e);
-            return ResultData.result(false).setMsg("验证码校验失败").toString();
+            return AjaxResult.error("验证码校验失败");
         }
         //获取变量
         String loginInfo = params.get("username");
@@ -78,17 +80,33 @@ public class LoginController extends BaseController {
             if (encPassword.equals(sysUser.getUserPassword())){
                 //创建令牌
                 UsernamePasswordToken token = new UsernamePasswordToken(sysUser.getId().toString(), password);
+                //登录对象
                 Subject subject = SecurityUtils.getSubject();
                 subject.login(token);
-                return ResultData.result(true).setData(subject.getSession().getId()).toString();
+                //返回sessionId
+                return AjaxResult.success(subject.getSession().getId());
             }else {
-                return ResultData.result(false).setMsg("用户密码错误！").toString();
+                return AjaxResult.error("用户密码错误！");
             }
-
         } else {
-            return ResultData.result(false).setMsg("用户尚未注册~！").toString();
+            return AjaxResult.error("用户尚未注册");
         }
+    }
 
+
+    /**
+     * 登陆接口
+     *
+     * @return
+     */
+    @GetMapping(value = "/userInfo")
+    @ResponseBody
+    public AjaxResult findUserInfo(@Param("token") String token) {
+        System.err.println(token);
+        Map<String, String> map = new HashMap<>();
+        map.put("name", "1234");
+        map.put("avter", "23456");
+        return AjaxResult.success(map);
     }
 
     /**

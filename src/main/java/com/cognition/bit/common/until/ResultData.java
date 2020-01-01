@@ -1,7 +1,6 @@
 package com.cognition.bit.common.until;
 
 
-import com.alibaba.fastjson.JSONObject;
 import com.cognition.bit.common.config.Constant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,10 +44,7 @@ public class ResultData {
      * @param result
      * @return
      */
-    public static JSONObject result(boolean result) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("state",result);
-        jsonObject.put("result",result);
+    public static ResultData result(boolean result) {
         return new ResultData().setSuccess(result).setState(result ? 1 : 0)
                 .setCode(result ? Constant.SERVER_SUCCESS : Constant.SERVER_ERROR)
                 .setMsg(result ? Constant.DEFAULT_SUCCESS_MSG : Constant.SERVER_ERROR_MSG);
@@ -60,7 +56,7 @@ public class ResultData {
      * @param msg
      * @return
      */
-    public static JSONObject result(boolean result, String msg) {
+    public static ResultData result(boolean result, String msg) {
         return new ResultData().setSuccess(result).setState(result ? 1 : 0)
                 .setCode(result ? Constant.SERVER_SUCCESS : Constant.SERVER_ERROR)
                 .setMsg(msg);
@@ -73,7 +69,7 @@ public class ResultData {
      * @param object
      * @return
      */
-    public static JSONObject result(boolean result, Object object) {
+    public static ResultData result(boolean result, Object object) {
         return new ResultData().setSuccess(result).setState(result ? 1 : 0)
                 .setCode(result ? Constant.SERVER_SUCCESS : Constant.SERVER_ERROR)
                 .setMsg(result ? Constant.DEFAULT_SUCCESS_MSG : Constant.SERVER_ERROR_MSG)

@@ -67,6 +67,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/toLogin", "anon");
         filterChainDefinitionMap.put("/toHome", "anon");
         filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/user/info", "anon");
 //        filterChainDefinitionMap.put("/toInterface", "anon");
 //        filterChainDefinitionMap.put("/toRegister", "anon");
 //        filterChainDefinitionMap.put("/getVerify", "anon");
@@ -111,15 +112,15 @@ public class ShiroConfig {
      * 凭证匹配器
      * MD5加密
      */
-    @Bean
-    public HashedCredentialsMatcher hashedCredentialsMatcher() {
-        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        //散列算法:这里使用MD5算法;
-        hashedCredentialsMatcher.setHashAlgorithmName("md5");
-        //散列的次数，比如散列两次，相当于 md5(md5(""));
-        hashedCredentialsMatcher.setHashIterations(2);
-        return hashedCredentialsMatcher;
-    }
+//    @Bean
+//    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+//        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+//        //散列算法:这里使用MD5算法;
+//        hashedCredentialsMatcher.setHashAlgorithmName("md5");
+//        //散列的次数，比如散列两次，相当于 md5(md5(""));
+//        hashedCredentialsMatcher.setHashIterations(2);
+//        return hashedCredentialsMatcher;
+//    }
 
 
     //*********************************认证管理*****************************************
@@ -132,7 +133,7 @@ public class ShiroConfig {
     @Bean("securityManager")
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(shiroAuthorizingRealm());
+        securityManager.setRealm(new ShiroAuthorizingRealm());
         // 自定义session管理 使用redis
         securityManager.setSessionManager(sessionManager());
         // 自定义缓存实现 使用redis
@@ -144,12 +145,12 @@ public class ShiroConfig {
      * shiro权限领域
      * @return
      */
-    @Bean
-    public ShiroAuthorizingRealm shiroAuthorizingRealm() {
-        ShiroAuthorizingRealm shiroAuthorizingRealm = new ShiroAuthorizingRealm();
-//        shiroAuthorizingRealm.setCredentialsMatcher(hashedCredentialsMatcher());
-        return shiroAuthorizingRealm;
-    }
+//    @Bean
+//    public ShiroAuthorizingRealm shiroAuthorizingRealm() {
+//        ShiroAuthorizingRealm shiroAuthorizingRealm = new ShiroAuthorizingRealm();
+////        shiroAuthorizingRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+//        return shiroAuthorizingRealm;
+//    }
 
 
     /**
