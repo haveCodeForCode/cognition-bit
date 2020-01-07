@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.cognition.bit.common.until.AjaxResult;
 import com.cognition.bit.common.until.RandomValidateCodeUtil;
 import com.cognition.bit.common.until.encrypt.Md5Utils;
+import com.cognition.bit.system.config.redis.RedisService;
 import com.cognition.bit.system.domain.SysUser;
 import com.cognition.bit.system.persistence.BaseController;
 import com.cognition.bit.system.service.UserService;
@@ -41,16 +42,21 @@ public class LoginController extends BaseController {
 
     private UserService userService;
 
+    private RedisService redisService;
 
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
+    @Autowired
+    public void setRedisService(RedisService redisService) {
+        this.redisService = redisService;
+    }
 
     /**
      * 登陆接口
-     * @param params
+     *
      * @return
      */
     @PostMapping(value = "/login")
@@ -95,7 +101,7 @@ public class LoginController extends BaseController {
 
 
     /**
-     * 登陆接口
+     * 登陆验证接口
      *
      * @return
      */
@@ -104,9 +110,19 @@ public class LoginController extends BaseController {
     public AjaxResult findUserInfo(@Param("token") String token) {
         System.err.println(token);
         Map<String, String> map = new HashMap<>();
+        String redisGet = redisService.redisGet(token);
         map.put("name", "1234");
         map.put("avter", "23456");
         return AjaxResult.success(map);
+    }
+
+    @GetMapping(value = "/testRedis")
+    @ResponseBody
+    public AjaxResult testRedis(@Param("value") String value) {
+        final double d = Math.random();
+        final int i = (int) (d * 1000);
+        redisService.redisSet(String.valueOf(i), value, 10);
+        return AjaxResult.success("成功");
     }
 
     /**

@@ -71,12 +71,12 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
     }
 
 
-    /**
-     * 授权身份信息
-     *
-     * @param principalCollection
-     * @return
-     */
+//    /**
+//     * 授权身份信息
+//     *
+//     * @param principalCollection
+//     * @return
+//     */
 //    @Override
 //    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
 //        //新建授权配置
@@ -94,13 +94,13 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
 //        return info;
 //    }
 
-    /**
-     * 验证身份信息
-     *
-     * @param authenticationToken
-     * @return
-     * @throws AuthenticationException
-     */
+//    /**
+//     * 验证身份信息
+//     *
+//     * @param authenticationToken
+//     * @return
+//     * @throws AuthenticationException
+//     */
 //    @Override
 //    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 //        //获取用户的输入的账号

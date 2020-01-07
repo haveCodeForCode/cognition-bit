@@ -8,6 +8,7 @@ const state = {
   device: 'desktop'
 }
 
+//菜单栏开关记录
 const mutations = {
   TOGGLE_SIDEBAR: state => {
     state.sidebar.opened = !state.sidebar.opened

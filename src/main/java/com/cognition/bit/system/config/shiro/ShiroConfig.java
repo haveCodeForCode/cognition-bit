@@ -108,20 +108,6 @@ public class ShiroConfig {
         return new LifecycleBeanPostProcessor();
     }
 
-    /**
-     * 凭证匹配器
-     * MD5加密
-     */
-//    @Bean
-//    public HashedCredentialsMatcher hashedCredentialsMatcher() {
-//        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-//        //散列算法:这里使用MD5算法;
-//        hashedCredentialsMatcher.setHashAlgorithmName("md5");
-//        //散列的次数，比如散列两次，相当于 md5(md5(""));
-//        hashedCredentialsMatcher.setHashIterations(2);
-//        return hashedCredentialsMatcher;
-//    }
-
 
     //*********************************认证管理*****************************************
 
@@ -140,17 +126,6 @@ public class ShiroConfig {
         securityManager.setCacheManager(redisCacheManager());
         return securityManager;
     }
-
-    /**
-     * shiro权限领域
-     * @return
-     */
-//    @Bean
-//    public ShiroAuthorizingRealm shiroAuthorizingRealm() {
-//        ShiroAuthorizingRealm shiroAuthorizingRealm = new ShiroAuthorizingRealm();
-////        shiroAuthorizingRealm.setCredentialsMatcher(hashedCredentialsMatcher());
-//        return shiroAuthorizingRealm;
-//    }
 
 
     /**
@@ -230,8 +205,9 @@ public class ShiroConfig {
         RedisManager redisManager = new RedisManager();
         redisManager.setHost(redisHost);
         redisManager.setPort(redisPort);
+        redisManager.setDatabase(9);
         // 配置缓存过期时间
-        redisManager.setExpire(1800);
+        redisManager.setExpire(5);
         redisManager.setTimeout(redisTimeout);
         redisManager.setPassword(redisPassword);
         return redisManager;
@@ -272,5 +248,20 @@ public class ShiroConfig {
      }
      *
      */
+
+    /**
+     * 凭证匹配器
+     * MD5加密
+     */
+//    @Bean
+//    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+//        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+//        //散列算法:这里使用MD5算法;
+//        hashedCredentialsMatcher.setHashAlgorithmName("md5");
+//        //散列的次数，比如散列两次，相当于 md5(md5(""));
+//        hashedCredentialsMatcher.setHashIterations(2);
+//        return hashedCredentialsMatcher;
+//    }
+
 }
 
