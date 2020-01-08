@@ -61,6 +61,29 @@ public class AjaxResult extends HashMap<String, Object> {
     /**
      * 返回成功消息
      *
+     * @param msg  返回内容
+     * @param data 数据对象
+     * @return 成功消息
+     */
+    public static AjaxResult success(String msg, Object data) {
+        return new AjaxResult(200, msg, data);
+    }
+
+    /**
+     * 返回错误消息
+     *
+     * @param msg  返回内容
+     * @param data 数据对象
+     * @return 警告消息
+     */
+    public static AjaxResult error(String msg, Object data) {
+        return new AjaxResult(500, msg, data);
+    }
+// ****************************************************************
+
+    /**
+     * 返回成功消息
+     *
      * @return 成功消息
      */
     public static AjaxResult success() {
@@ -86,16 +109,7 @@ public class AjaxResult extends HashMap<String, Object> {
         return AjaxResult.success(msg, null);
     }
 
-    /**
-     * 返回成功消息
-     *
-     * @param msg  返回内容
-     * @param data 数据对象
-     * @return 成功消息
-     */
-    public static AjaxResult success(String msg, Object data) {
-        return new AjaxResult(200, msg, data);
-    }
+
 
     /**
      * 返回错误消息
@@ -114,17 +128,6 @@ public class AjaxResult extends HashMap<String, Object> {
      */
     public static AjaxResult error(String msg) {
         return AjaxResult.error(msg, null);
-    }
-
-    /**
-     * 返回错误消息
-     *
-     * @param msg  返回内容
-     * @param data 数据对象
-     * @return 警告消息
-     */
-    public static AjaxResult error(String msg, Object data) {
-        return new AjaxResult(500, msg, data);
     }
 
     /**

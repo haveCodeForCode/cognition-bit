@@ -4,6 +4,7 @@ import com.cognition.bit.common.config.Constant;
 import com.cognition.bit.common.until.StringUtils;
 import com.cognition.bit.common.until.encrypt.Md5Utils;
 import com.cognition.bit.system.config.ApplicationContextRegister;
+//import com.cognition.bit.system.config.jwt.JwtToken;
 import com.cognition.bit.system.dao.UserDao;
 import com.cognition.bit.system.domain.SysUser;
 import com.cognition.bit.system.service.MenuService;
@@ -31,6 +32,19 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
+    /**
+     * 大坑！，必须重写此方法，不然Shiro会报错
+     */
+//    @Override
+//    public boolean supports(AuthenticationToken token) {
+//        return token instanceof JwtToken;
+//    }
+
+    /**
+     * 验证信息
+     * @param arg0
+     * @return
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0) {
         Long userId = ShiroUtils.getUserId();

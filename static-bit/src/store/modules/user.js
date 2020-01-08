@@ -34,7 +34,6 @@ const actions = {
     const password = userInfo.password
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
-        debugger
         const { data } = response
         console.log(data)
         commit('SET_TOKEN', data)
@@ -49,7 +48,6 @@ const actions = {
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      debugger
       getInfo(state.token).then(response => {
         const { data } = response
 

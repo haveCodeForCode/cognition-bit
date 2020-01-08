@@ -1,10 +1,9 @@
 package com.cognition.bit.system.config.shiro;
 
 
-
 import com.cognition.bit.system.service.UserService;
+import com.google.common.collect.Maps;
 import net.sf.ehcache.CacheManager;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
@@ -15,15 +14,14 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.HandlerExceptionResolver;
+
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-
-import java.util.LinkedHashMap;
 
 /**
  * Shiro 设置
@@ -62,17 +60,22 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/toInterface");
         shiroFilterFactoryBean.setSuccessUrl("/index");
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
+        //退出拦截器
+        Map<String, Filter> filterMap = Maps.newHashMap();
+        filterMap.put("logout", new ShiroLogoutFilter());
+        shiroFilterFactoryBean.setFilters(filterMap);
+
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/toLogin", "anon");
         filterChainDefinitionMap.put("/toHome", "anon");
         filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/user/info", "anon");
+        filterChainDefinitionMap.put("/website-front/**", "anon");
+        filterChainDefinitionMap.put("/logout", "logout");
 //        filterChainDefinitionMap.put("/toInterface", "anon");
 //        filterChainDefinitionMap.put("/toRegister", "anon");
 //        filterChainDefinitionMap.put("/getVerify", "anon");
-        filterChainDefinitionMap.put("/website-front/**", "anon");
-        filterChainDefinitionMap.put("/logout", "logout");
 //        filterChainDefinitionMap.put("/docs/**", "anon");
 //        filterChainDefinitionMap.put("/druid/**", "anon");
 //        filterChainDefinitionMap.put("/upload/**", "anon");
@@ -149,6 +152,7 @@ public class ShiroConfig {
     @Bean
     public RedisSessionDAO redisSessionDAO() {
         RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
+        redisSessionDAO.setExpire(1800);
         redisSessionDAO.setRedisManager(redisManager());
         return redisSessionDAO;
     }
@@ -191,6 +195,7 @@ public class ShiroConfig {
         ehCacheManager.setCacheManager(eCacheManager());
         return ehCacheManager;
     }
+
 //***********************************************************************************
 
     /**
@@ -206,8 +211,6 @@ public class ShiroConfig {
         redisManager.setHost(redisHost);
         redisManager.setPort(redisPort);
         redisManager.setDatabase(9);
-        // 配置缓存过期时间
-        redisManager.setExpire(5);
         redisManager.setTimeout(redisTimeout);
         redisManager.setPassword(redisPassword);
         return redisManager;
@@ -218,12 +221,12 @@ public class ShiroConfig {
      * spring自动代理
      * @return
      */
-//    @Bean
-//    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
-//        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
-//        defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
-//        return defaultAdvisorAutoProxyCreator;
-//    }
+    @Bean
+    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+        defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
+        return defaultAdvisorAutoProxyCreator;
+    }
 
     /**
      * 关闭shiro认证控制器,使用jwt
